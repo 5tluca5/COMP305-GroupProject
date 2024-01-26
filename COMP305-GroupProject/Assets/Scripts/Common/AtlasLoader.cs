@@ -44,10 +44,16 @@ public class AtlasLoader
             return;
         }
 
+        string result = "";
         for (int i = 0; i < allSprites.Length; i++)
         {
             spriteDic.Add(allSprites[i].name, allSprites[i]);
+            Debug.Log($"{allSprites[i].name} has loaded.");
+            result += "\"" + allSprites[i].name + "\", ";
         }
+
+        Debug.Log(result);
+
     }
 
     //Get the provided atlas from the loaded sprites
