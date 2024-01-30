@@ -75,6 +75,7 @@ public class TankStatManager : MonoBehaviour
     private class TankPartStatData
     {
         public string partName;
+        public string assoPartName;
         public string type;
         public float damage;
         public int health;
@@ -104,11 +105,12 @@ public class TankStatManager : MonoBehaviour
             var tempTankPart = new TankPartStatData();
             tempTankPart.partName = data[7 * (i + 1)];
             tempTankPart.type = data[7 * (i + 1) + 1];
-            tempTankPart.damage = float.Parse(data[7 * (i + 1) + 2]);
-            tempTankPart.health = int.Parse(data[7 * (i + 1) + 3]);
-            tempTankPart.fireRate = float.Parse(data[7 * (i + 1) + 4]);
-            tempTankPart.movementSpeed = float.Parse(data[7 * (i + 1) + 5]);
-            tempTankPart.price = int.Parse(data[7 * (i + 1) + 6]);
+            tempTankPart.assoPartName = data[7 * (i + 1) + 2];
+            float.TryParse(data[7 * (i + 1) + 3], out tempTankPart.damage);
+            int.TryParse(data[7 * (i + 1) + 4], out tempTankPart.health);
+            float.TryParse(data[7 * (i + 1) + 5], out tempTankPart.fireRate);
+            float.TryParse(data[7 * (i + 1) + 6], out tempTankPart.movementSpeed);
+            int.TryParse(data[7 * (i + 1) + 7], out tempTankPart.price);
             tankPartStatList.Add(tempTankPart);
         }
     }
@@ -142,10 +144,11 @@ public class TankStatManager : MonoBehaviour
         List<TankPartStatData> parts = new List<TankPartStatData>();
         parts = tankPartStatList.FindAll(x => x.type == tankPart);
         int j = 0;
+
         foreach (var part in parts)
         {
             var id = globalId + j;
-            var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed), part.partName);
+            var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed), part.partName, tankPart == "Gun" ? part.assoPartName : "");
             tempDictPart.Add(j, tp);
             dictById.Add(id, tp);
             j++;
