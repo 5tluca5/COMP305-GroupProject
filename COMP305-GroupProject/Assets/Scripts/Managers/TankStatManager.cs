@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -22,8 +22,9 @@ public class TankStatManager : MonoBehaviour
 
     public TankStatManager()
     {
-        GenerateData();
+        GenerateGameData();
     }
+
 
     [Header("Current Stat")]
     [SerializeField] ReactiveProperty<TankStat> currentTankStat;
@@ -53,51 +54,105 @@ public class TankStatManager : MonoBehaviour
         
 
     }
+
     //Modify the attributes data here
-    void GenerateData()
+    void GenerateGameData()
     {
+        GenerateTankPartStatList();
+
         dictByTankParts.Clear();
         dictById.Clear();
 
+        //Generate tank part game data from csvlist
+        GeneratePartsDataBy(TankParts.Hull);
+        GeneratePartsDataBy(TankParts.Tower);
+        GeneratePartsDataBy(TankParts.Gun);
+        GeneratePartsDataBy(TankParts.Track);
+    }
+
+
+    [Serializable]
+    private class TankPartStatData
+    {
+        public string partName;
+        public string type;
+        public float damage;
+        public int health;
+        public float fireRate;
+        public float movementSpeed;
+        public int price;
+    }
+
+    private TextAsset tankPartStatCSVtData;
+    private List<TankPartStatData> tankPartStatList = new List<TankPartStatData>();
+
+
+    void GenerateTankPartStatList()
+    {
+        dictByTankParts.Clear();
+        dictById.Clear();
         var globalId = 1000;
+        tankPartStatCSVtData = Resources.Load<TextAsset>("TankStat1");
 
-        // Total track: 4
-        string[] trackSpriteNames = { "TrackAFrame2", "TrackBFrame2", "TrackCFrame2", "TrackDFrame2"};
-        TankStat[] trackStats = { new TankStat(0, 0, 15), new TankStat(0, 0, 10), new TankStat(0, 0, 8), new TankStat(0, 0, 5) };
+        // get data from csv
+        string[] data = tankPartStatCSVtData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
-        globalId += 1000;
+        //get the table size and create list with the given size
+        int tableSize = data.Length / 7 - 1;
 
-        // Total Hull: 10
-        string[] hullSpriteNames = { "HeavyHullA", "HeavyHullB", "HeavyHullC", "HeavyHullD", "MediumHullA", "MediumHullB", "MediumHullC", "SmallHullA", "SmallHullB", "SmallHullC" };
-
-        var tempDict = new Dictionary<int, TankPart>();
-
-        for(int i=0; i<hullSpriteNames.Length; i++)
+        for (int i = 0; i < tableSize; i++)
         {
-            var id = globalId + i;
-            var tp = new TankPart(id, i, TankParts.Hull, new TankStat(10, 1, 3), hullSpriteNames[i]);
-            tempDict.Add(i, tp);
-            dictById.Add(id, tp);
+            var tempTankPart = new TankPartStatData();
+            tempTankPart.partName = data[7 * (i + 1)];
+            tempTankPart.type = data[7 * (i + 1) + 1];
+            tempTankPart.damage = float.Parse(data[7 * (i + 1) + 2]);
+            tempTankPart.health = int.Parse(data[7 * (i + 1) + 3]);
+            tempTankPart.fireRate = float.Parse(data[7 * (i + 1) + 4]);
+            tempTankPart.movementSpeed = float.Parse(data[7 * (i + 1) + 5]);
+            tempTankPart.price = int.Parse(data[7 * (i + 1) + 6]);
+            tankPartStatList.Add(tempTankPart);
+        }
+    }
+
+    void GeneratePartsDataBy(TankParts type) 
+    {
+        string tankPart;
+        int globalId = 0;
+
+        switch (type) 
+        {
+            case TankParts.Hull:
+                tankPart = "Hull";
+                globalId = 1000;
+                break;
+            case TankParts.Tower:
+                tankPart = "Tower";
+                globalId = 2000;
+                break;
+            case TankParts.Gun:
+                tankPart = "Gun";
+                globalId = 3000;
+                break;
+            case TankParts.Track:
+                tankPart = "TrackFrame";
+                globalId = 4000;
+                break;
         }
 
-        dictByTankParts.Add(TankParts.Hull, tempDict);
+        var tempDictPart = new Dictionary<int, TankPart>();
+        List<TankPartStatData> parts = new List<TankPartStatData>();
+        parts = tankPartStatList.FindAll(x => x.type == "Hull");
+        int j = 0;
+        foreach (var part in parts)
+        {
+            var id = globalId + j;
+            var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed), part.partName);
+            tempDictPart.Add(j, tp);
+            dictById.Add(id, tp);
+            j++;
+        }
 
-        globalId += 1000;
-
-        // Total tower: 10
-        string[] towerSpriteNames = { "HeavyTowerA", "HeavyTowerB", "HeavyTowerC", "HeavyTowerD", "MediumTowerA", "MediumTowerB", "MediumTowerC", "SmallTowerA", "SmallTowerB", "SmallTowerC" };
-
-        globalId += 1000;
-
-        // Total Gun: 15
-        string[] gunSpriteNames = { "HeavyGunA", "HeavyGunB", "HeavyGunC", "HeavyGunD", "HeavyGunE", "HeavyGunF", "HeavyGunG", "HeavyGunH",
-            "MediumGunA", "MediumGunB", "MediumGunC", "MediumGunD", "SmallGunA", "SmallGunB", "SmallGunC", };
-
-        globalId += 1000;
-
-        // Total gun connector: 6
-        string[] connectorSpriteNames = { "GunConnectorA", "GunConnectorB", "GunConnectorC", "GunConnectorD", "GunConnectorE", "GunConnectorF" };
-        
+        dictByTankParts.Add(type, tempDictPart);
     }
 
 
