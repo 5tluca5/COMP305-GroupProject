@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TankParts
+public enum TankParts : int
 {
-    Light,
+    Light = 0,
     Track,
     Hull,
     Tower,
@@ -43,7 +43,7 @@ public class TankPart
     public TankParts parts;
     public TankStat stat;
     public string spriteName;
-    public string associateSpriteName;
+    public string associateSpriteName;  // For the guns, need to specify which gun connector its using
     public Color color; // for light color
 
     // Extra abilites

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System.Linq;
 
 public class TankStatManager : MonoBehaviour
 {
@@ -59,18 +60,30 @@ public class TankStatManager : MonoBehaviour
         dictByTankParts.Clear();
         dictById.Clear();
 
+        var tempDict = new Dictionary<int, TankPart>();
+
         var globalId = 1000;
 
         // Total track: 4
-        string[] trackSpriteNames = { "TrackAFrame2", "TrackBFrame2", "TrackCFrame2", "TrackDFrame2"};
+        string[] trackSpriteNames = { "TrackAFrame2", "TrackBFrame2", "TrackСFrame2", "TrackDFrame2"};
         TankStat[] trackStats = { new TankStat(0, 0, 15), new TankStat(0, 0, 10), new TankStat(0, 0, 8), new TankStat(0, 0, 5) };
 
+        for (int i = 0; i < trackSpriteNames.Length; i++)
+        {
+            var id = globalId + i;
+            var tp = new TankPart(id, i, TankParts.Track, trackStats[i], trackSpriteNames[i]);
+            tempDict.Add(i, tp);
+            dictById.Add(id, tp);
+        }
+
+        dictByTankParts.Add(TankParts.Track, tempDict);
+
         globalId += 1000;
+        tempDict = new Dictionary<int, TankPart>();
 
         // Total Hull: 10
         string[] hullSpriteNames = { "HeavyHullA", "HeavyHullB", "HeavyHullC", "HeavyHullD", "MediumHullA", "MediumHullB", "MediumHullC", "SmallHullA", "SmallHullB", "SmallHullC" };
 
-        var tempDict = new Dictionary<int, TankPart>();
 
         for(int i=0; i<hullSpriteNames.Length; i++)
         {
@@ -82,23 +95,48 @@ public class TankStatManager : MonoBehaviour
 
         dictByTankParts.Add(TankParts.Hull, tempDict);
 
+        tempDict = new Dictionary<int, TankPart>();
         globalId += 1000;
 
         // Total tower: 10
         string[] towerSpriteNames = { "HeavyTowerA", "HeavyTowerB", "HeavyTowerC", "HeavyTowerD", "MediumTowerA", "MediumTowerB", "MediumTowerC", "SmallTowerA", "SmallTowerB", "SmallTowerC" };
+        
+        for (int i = 0; i < towerSpriteNames.Length; i++)
+        {
+            var id = globalId + i;
+            var tp = new TankPart(id, i, TankParts.Tower, new TankStat(3, 3+i, 3), towerSpriteNames[i]);
+            tempDict.Add(i, tp);
+            dictById.Add(id, tp);
+        }
 
+        dictByTankParts.Add(TankParts.Tower, tempDict);
+
+        tempDict = new Dictionary<int, TankPart>();
         globalId += 1000;
 
         // Total Gun: 15
         string[] gunSpriteNames = { "HeavyGunA", "HeavyGunB", "HeavyGunC", "HeavyGunD", "HeavyGunE", "HeavyGunF", "HeavyGunG", "HeavyGunH",
             "MediumGunA", "MediumGunB", "MediumGunC", "MediumGunD", "SmallGunA", "SmallGunB", "SmallGunC", };
 
-        globalId += 1000;
-
         // Total gun connector: 6
         string[] connectorSpriteNames = { "GunConnectorA", "GunConnectorB", "GunConnectorC", "GunConnectorD", "GunConnectorE", "GunConnectorF" };
+
+        for (int i = 0; i < gunSpriteNames.Length; i++)
+        {
+            var id = globalId + i;
+            var tp = new TankPart(id, i, TankParts.Gun, new TankStat(18 - i, 3, 3), gunSpriteNames[i], connectorSpriteNames[i % connectorSpriteNames.Length]);
+            tempDict.Add(i, tp);
+            dictById.Add(id, tp);
+        }
+
+        dictByTankParts.Add(TankParts.Gun, tempDict);
         
     }
 
+    public List<TankPart> GetObtainedTankPart(TankParts parts)
+    {
+        // Do logic here..
 
+        return dictByTankParts[parts].Values.ToList();
+    }
 }
