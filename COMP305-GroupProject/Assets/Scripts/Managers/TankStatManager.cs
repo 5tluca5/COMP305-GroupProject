@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System.Linq;
 
 public class TankStatManager : MonoBehaviour
 {
@@ -25,7 +26,6 @@ public class TankStatManager : MonoBehaviour
         GenerateGameData();
     }
 
-
     [Header("Current Stat")]
     [SerializeField] ReactiveProperty<TankStat> currentTankStat;
     Dictionary<TankParts, int> currentTankParts = new Dictionary<TankParts, int>();
@@ -43,16 +43,11 @@ public class TankStatManager : MonoBehaviour
     void LoadData()
     {
         currentTankParts.Clear();
-
-
     }
 
     public void CalculateTankStat()
     {
         var newStat = new TankStat(0, 0, 0);
-
-        
-
     }
 
     //Modify the attributes data here
@@ -70,7 +65,6 @@ public class TankStatManager : MonoBehaviour
         GeneratePartsDataBy(TankParts.Track);
     }
 
-
     [Serializable]
     private class TankPartStatData
     {
@@ -85,7 +79,6 @@ public class TankStatManager : MonoBehaviour
 
     private TextAsset tankPartStatCSVtData;
     private List<TankPartStatData> tankPartStatList = new List<TankPartStatData>();
-
 
     void GenerateTankPartStatList()
     {
@@ -155,5 +148,23 @@ public class TankStatManager : MonoBehaviour
         dictByTankParts.Add(type, tempDictPart);
     }
 
+    public List<TankPart> GetObtainedTankPart(TankParts parts)
+    {
+        // Do logic here..
 
+        return dictByTankParts[parts].Values.ToList();
+    }
+
+    public TankPart GetTankPartData(TankParts parts, int id)
+    {
+        if (!dictByTankParts.ContainsKey(parts))
+            return new TankPart(0000, 0, Color.gray);
+        else
+            return dictByTankParts[parts][id];
+    }
+
+    public Sprite GetTankPartImage(TankParts parts, int id)
+    {
+        return AtlasLoader.Instance.GetSprite(GetTankPartData(parts, id).spriteName);
+    }
 }
