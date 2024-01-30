@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class TankStatManager : MonoBehaviour
 {
@@ -21,11 +22,6 @@ public class TankStatManager : MonoBehaviour
         }
     }
 
-    public TankStatManager()
-    {
-        GenerateGameData();
-    }
-
     [Header("Current Stat")]
     [SerializeField] ReactiveProperty<TankStat> currentTankStat;
     Dictionary<TankParts, int> currentTankParts = new Dictionary<TankParts, int>();
@@ -34,10 +30,20 @@ public class TankStatManager : MonoBehaviour
     Dictionary<TankParts, Dictionary<int, TankPart>> dictByTankParts = new Dictionary<TankParts, Dictionary<int, TankPart>>();
     Dictionary<int, TankPart> dictById = new Dictionary<int, TankPart>();
 
+    public TankStatManager()
+    {
+        instance = this;
+    }
+
     private void Awake()
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Init()
+    {
+        GenerateGameData();
     }
 
     void LoadData()
@@ -109,7 +115,7 @@ public class TankStatManager : MonoBehaviour
 
     void GeneratePartsDataBy(TankParts type) 
     {
-        string tankPart;
+        string tankPart = "";
         int globalId = 0;
 
         switch (type) 
@@ -134,7 +140,7 @@ public class TankStatManager : MonoBehaviour
 
         var tempDictPart = new Dictionary<int, TankPart>();
         List<TankPartStatData> parts = new List<TankPartStatData>();
-        parts = tankPartStatList.FindAll(x => x.type == "Hull");
+        parts = tankPartStatList.FindAll(x => x.type == tankPart);
         int j = 0;
         foreach (var part in parts)
         {

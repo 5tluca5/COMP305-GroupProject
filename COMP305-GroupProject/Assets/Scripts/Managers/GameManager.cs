@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
         AtlasLoader.Instance.LoadAtlas("Artworks/TankConstructor/Images");
         Debug.Log("Atlas Count: " + AtlasLoader.Instance.AtlasCount());
 
+        TankStatManager.Instance.Init();
+
         LoadData();
     }
 
