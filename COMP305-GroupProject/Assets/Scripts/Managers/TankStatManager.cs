@@ -139,4 +139,17 @@ public class TankStatManager : MonoBehaviour
 
         return dictByTankParts[parts].Values.ToList();
     }
+
+    public TankPart GetTankPartData(TankParts parts, int id)
+    {
+        if (!dictByTankParts.ContainsKey(parts))
+            return new TankPart(0000, 0, Color.gray);
+        else
+            return dictByTankParts[parts][id];
+    }
+
+    public Sprite GetTankPartImage(TankParts parts, int id)
+    {
+        return AtlasLoader.Instance.GetSprite(GetTankPartData(parts, id).spriteName);
+    }
 }

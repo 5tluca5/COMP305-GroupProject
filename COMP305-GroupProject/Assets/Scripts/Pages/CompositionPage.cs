@@ -19,29 +19,44 @@ public class CompositionPage : CommonPage
     [Header("Arrows")]
     [SerializeField] GameObject leftArrowBtn;
     [SerializeField] GameObject rightArrowBtn;
-    int partIndex = 0;
 
     [Header("Menu")]
     [SerializeField] TabMenu tabMenu;
 
-    TankParts currentPart = TankParts.Light;
+    // data
+    TankParts currentTab = TankParts.Light;
     List<TankPart> availablePartList;
+    Dictionary<TankParts, TankPart> selectingTankParts = new Dictionary<TankParts, TankPart>();
 
     // Start is called before the first frame update
     void Start()
     {
+        selectingTankParts = GameManager.Instance.GetCurrentTankParts();
+        LoadTank();
+
         tabMenu.selected.Subscribe(tab =>
         {
             if (tab == null) return;
 
-            currentPart = (TankParts)tab.GetTabIndex();
-            availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentPart);
+            currentTab = (TankParts)tab.GetTabIndex();
+            availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
         }).AddTo(this);
+
+        onCloseCallback += OnClose;
+    }
+
+    void LoadTank()
+    {
+        trackLImg.sprite = trackRImg.sprite = AtlasLoader.Instance.GetSprite(selectingTankParts[TankParts.Track].spriteName);
+        towerImg.sprite = AtlasLoader.Instance.GetSprite(selectingTankParts[TankParts.Tower].spriteName);
+        hullImg.sprite = AtlasLoader.Instance.GetSprite(selectingTankParts[TankParts.Hull].spriteName);
+        gunImg.sprite = AtlasLoader.Instance.GetSprite(selectingTankParts[TankParts.Gun].spriteName);
+        gunConnectorImg.sprite = AtlasLoader.Instance.GetSprite(selectingTankParts[TankParts.Gun].associateSpriteName);
     }
 
     public void OnClickLeftArrowBtn()
     {
-        var part = availablePartList[Mathf.Abs(partIndex-- % availablePartList.Count)];
+        var part = availablePartList[Mathf.Abs(--selectingTankParts[currentTab].subId % availablePartList.Count)];
         var sprite = AtlasLoader.Instance.GetSprite(part.spriteName);
         Sprite sprite2 = null;
 
@@ -50,15 +65,15 @@ public class CompositionPage : CommonPage
             sprite2 = AtlasLoader.Instance.GetSprite(part.associateSpriteName);
         }
 
-        if(currentPart == TankParts.Gun || currentPart == TankParts.Track)
-            StartCoroutine(ChangeTankPartVertically(true, currentPart, sprite, sprite2));
+        if(currentTab == TankParts.Gun || currentTab == TankParts.Track)
+            StartCoroutine(ChangeTankPartVertically(true, currentTab, sprite, sprite2));
         else
-            StartCoroutine(ChangeTankPartHorizontally(true, currentPart, sprite));
+            StartCoroutine(ChangeTankPartHorizontally(true, currentTab, sprite));
     }
 
     public void OnClickRightArrowBtn()
     {
-        var part = availablePartList[Mathf.Abs(partIndex++ % availablePartList.Count)];
+        var part = availablePartList[Mathf.Abs(++selectingTankParts[currentTab].subId % availablePartList.Count)];
         var sprite = AtlasLoader.Instance.GetSprite(part.spriteName);
         Sprite sprite2 = null;
 
@@ -67,10 +82,10 @@ public class CompositionPage : CommonPage
             sprite2 = AtlasLoader.Instance.GetSprite(part.associateSpriteName);
         }
 
-        if (currentPart == TankParts.Gun || currentPart == TankParts.Track)
-            StartCoroutine(ChangeTankPartVertically(false, currentPart, sprite, sprite2));
+        if (currentTab == TankParts.Gun || currentTab == TankParts.Track)
+            StartCoroutine(ChangeTankPartVertically(false, currentTab, sprite, sprite2));
         else
-            StartCoroutine(ChangeTankPartHorizontally(false, currentPart, sprite));
+            StartCoroutine(ChangeTankPartHorizontally(false, currentTab, sprite));
     }
 
     IEnumerator ChangeTankPartHorizontally(bool isLeft, TankParts tankPart, Sprite s)
@@ -153,5 +168,10 @@ public class CompositionPage : CommonPage
     {
         leftArrowBtn.SetActive(set);
         rightArrowBtn.SetActive(set);
+    }
+
+    void OnClose()
+    {
+
     }
 }

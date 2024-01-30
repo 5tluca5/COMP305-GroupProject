@@ -2,23 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class CommonPage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    protected UnityAction onCloseCallback;
 
     public void OnClickBackBtn()
     {
+        onCloseCallback?.Invoke();
         StartCoroutine(ClosePage());
     }
 
