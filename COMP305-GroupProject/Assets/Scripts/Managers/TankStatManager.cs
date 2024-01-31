@@ -51,9 +51,13 @@ public class TankStatManager : MonoBehaviour
         currentTankParts.Clear();
     }
 
-    public void CalculateTankStat()
+    public TankStat CalculateTankStat(List<TankPart> parts)
     {
-        var newStat = new TankStat(0, 0, 0, 0);
+        var result = new TankStat(0, 0, 0, 0);
+
+        parts.ForEach(x => result += x.stat);
+
+        return result;
     }
 
     //Modify the attributes data here
@@ -142,7 +146,7 @@ public class TankStatManager : MonoBehaviour
                 globalId = 5000;
                 break;
         }
-
+        
         var tempDictPart = new Dictionary<int, TankPart>();
         int j = 0;
 

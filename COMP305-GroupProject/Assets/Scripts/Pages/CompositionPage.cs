@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class CompositionPage : CommonPage
 {
@@ -21,6 +22,8 @@ public class CompositionPage : CommonPage
     [SerializeField] GameObject leftArrowBtn;
     [SerializeField] GameObject rightArrowBtn;
 
+    [Header("Attribute")]
+    [SerializeField] Attribute attribute;
     [Header("Menu")]
     [SerializeField] TabMenu tabMenu;
 
@@ -28,7 +31,7 @@ public class CompositionPage : CommonPage
     TankParts currentTab = TankParts.Light;
     List<TankPart> availablePartList;
     Dictionary<TankParts, TankPart> selectingTankParts = new Dictionary<TankParts, TankPart>();
-
+    ReactiveProperty<TankStat> currentStat = new ReactiveProperty<TankStat>(new TankStat(0, 0, 0, 0));
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +49,13 @@ public class CompositionPage : CommonPage
             availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
         }).AddTo(this);
 
+        currentStat.Subscribe(stat =>
+        {
+            attribute.SetStat(stat);
+        }).AddTo(this);
+
+        RefreshAttribute();
+
         onCloseCallback += OnClose;
     }
 
@@ -61,6 +71,9 @@ public class CompositionPage : CommonPage
     public void OnClickLeftArrowBtn()
     {
         var part = availablePartList[Mathf.Abs(--selectingTankParts[currentTab].subId % availablePartList.Count)];
+        selectingTankParts[currentTab] = part;
+        RefreshAttribute();
+
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
         else
@@ -78,11 +91,16 @@ public class CompositionPage : CommonPage
             else
                 StartCoroutine(ChangeTankPartHorizontally(true, currentTab, sprite));
         }
+
+        // Debug
+        //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     public void OnClickRightArrowBtn()
     {
         var part = availablePartList[Mathf.Abs(++selectingTankParts[currentTab].subId % availablePartList.Count)];
+        selectingTankParts[currentTab] = part;
+        RefreshAttribute();
 
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
@@ -101,7 +119,9 @@ public class CompositionPage : CommonPage
             else
                 StartCoroutine(ChangeTankPartHorizontally(false, currentTab, sprite));
         }
-        
+
+        // Debug
+        //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     IEnumerator ChangeTankColor(Color32 color)
@@ -200,5 +220,10 @@ public class CompositionPage : CommonPage
     void OnClose()
     {
 
+    }
+
+    void RefreshAttribute()
+    {
+        currentStat.Value = TankStatManager.Instance.CalculateTankStat(selectingTankParts.Values.ToList());
     }
 }

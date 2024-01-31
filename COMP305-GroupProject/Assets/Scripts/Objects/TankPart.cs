@@ -10,6 +10,13 @@ public enum TankParts : int
     Tower,
     Gun
 }
+public enum AttributeType : int
+{
+    Damage = 0,
+    FireRate,
+    MovementSpeed,
+    Health
+}
 
 public struct TankStat
 {
