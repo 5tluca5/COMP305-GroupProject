@@ -148,7 +148,7 @@ public class TankStatManager : MonoBehaviour
         foreach (var part in parts)
         {
             var id = globalId + j;
-            var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed), part.partName, tankPart == "Gun" ? part.assoPartName : "");
+            var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed, part.health), part.partName, tankPart == "Gun" ? part.assoPartName : "");
             tempDictPart.Add(j, tp);
             dictById.Add(id, tp);
             j++;

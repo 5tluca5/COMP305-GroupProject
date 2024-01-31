@@ -13,26 +13,27 @@ public enum TankParts : int
 
 public struct TankStat
 {
-
     public static float TankMaxDamage = 100;
     public static float TankMaxFireRate = 50;
     public static float TankMaxMovementSpeed = 15;
+    public static float TankMaxHealth = 150;
 
     [Range(1, 100)] public float damage;
     [Range(1, 50)] public float fireRate;
     [Range(1, 15)] public float movementSpeed;
+    [Range(1, 50)] public float health;
 
-    public TankStat(float dmg, float fr, float ms)
+    public TankStat(float dmg, float fr, float ms, float hp)
     {
         this.damage = dmg;
         this.fireRate = fr;
         this.movementSpeed = ms;
-
+        this.health = hp;
     }
 
     public static TankStat operator +(TankStat a, TankStat b)
     {
-        return new TankStat(a.damage + b.damage, a.fireRate + b.fireRate, a.movementSpeed + b.movementSpeed);
+        return new TankStat(a.damage + b.damage, a.fireRate + b.fireRate, a.movementSpeed + b.movementSpeed, a.health+b.health);
     }
 }
 
