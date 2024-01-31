@@ -65,6 +65,7 @@ public class TankStatManager : MonoBehaviour
         dictById.Clear();
 
         //Generate tank part game data from csvlist
+        GeneratePartsDataBy(TankParts.Light);
         GeneratePartsDataBy(TankParts.Hull);
         GeneratePartsDataBy(TankParts.Tower);
         GeneratePartsDataBy(TankParts.Gun);
@@ -91,26 +92,25 @@ public class TankStatManager : MonoBehaviour
     {
         dictByTankParts.Clear();
         dictById.Clear();
-        var globalId = 1000;
         tankPartStatCSVtData = Resources.Load<TextAsset>("TankStat1");
 
         // get data from csv
         string[] data = tankPartStatCSVtData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
         //get the table size and create list with the given size
-        int tableSize = data.Length / 7 - 1;
+        int tableSize = data.Length / 8 - 1;
 
         for (int i = 0; i < tableSize; i++)
         {
             var tempTankPart = new TankPartStatData();
-            tempTankPart.partName = data[7 * (i + 1)];
-            tempTankPart.type = data[7 * (i + 1) + 1];
-            tempTankPart.assoPartName = data[7 * (i + 1) + 2];
-            float.TryParse(data[7 * (i + 1) + 3], out tempTankPart.damage);
-            int.TryParse(data[7 * (i + 1) + 4], out tempTankPart.health);
-            float.TryParse(data[7 * (i + 1) + 5], out tempTankPart.fireRate);
-            float.TryParse(data[7 * (i + 1) + 6], out tempTankPart.movementSpeed);
-            int.TryParse(data[7 * (i + 1) + 7], out tempTankPart.price);
+            tempTankPart.partName = data[8 * (i + 1)];
+            tempTankPart.type = data[8 * (i + 1) + 1];
+            tempTankPart.assoPartName = data[8 * (i + 1) + 2];
+            float.TryParse(data[8 * (i + 1) + 3], out tempTankPart.damage);
+            int.TryParse(data[8 * (i + 1) + 4], out tempTankPart.health);
+            float.TryParse(data[8 * (i + 1) + 5], out tempTankPart.fireRate);
+            float.TryParse(data[8 * (i + 1) + 6], out tempTankPart.movementSpeed);
+            int.TryParse(data[8 * (i + 1) + 7], out tempTankPart.price);
             tankPartStatList.Add(tempTankPart);
         }
     }
@@ -138,12 +138,41 @@ public class TankStatManager : MonoBehaviour
                 tankPart = "TrackFrame";
                 globalId = 4000;
                 break;
+            case TankParts.Light:
+                globalId = 5000;
+                break;
         }
 
         var tempDictPart = new Dictionary<int, TankPart>();
-        List<TankPartStatData> parts = new List<TankPartStatData>();
-        parts = tankPartStatList.FindAll(x => x.type == tankPart);
         int j = 0;
+
+        if (type == TankParts.Light)
+        {
+            var colors = new Color32[] {
+                new Color32(63, 128, 104, 255),
+                new Color32(73, 128, 63, 255),
+                new Color32(119, 128, 63, 255),
+                new Color32(128, 101, 63, 255),
+                new Color32(128, 63, 64, 255),
+                new Color32(128, 63, 111, 255),
+                new Color32(85, 63, 128, 255),
+                new Color32(63, 86, 128, 255),
+                new Color32(63, 128, 120, 255),
+            };
+
+            foreach(var c in colors)
+            {
+                var id = globalId + j;
+                var tp = new TankPart(id, j, c);
+                tempDictPart.Add(j, tp);
+                dictById.Add(id, tp);
+                j++;
+            }
+        }
+        else
+        {
+            List<TankPartStatData> parts = new List<TankPartStatData>();
+            parts = tankPartStatList.FindAll(x => x.type == tankPart);
 
         foreach (var part in parts)
         {

@@ -48,7 +48,7 @@ public class AtlasLoader
         for (int i = 0; i < allSprites.Length; i++)
         {
             spriteDic.Add(allSprites[i].name, allSprites[i]);
-            Debug.Log($"{allSprites[i].name} has loaded.");
+            //Debug.Log($"{allSprites[i].name} has loaded.");
             result += "\"" + allSprites[i].name + "\", ";
         }
 
