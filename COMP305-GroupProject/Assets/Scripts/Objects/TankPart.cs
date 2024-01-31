@@ -44,12 +44,12 @@ public class TankPart
     public TankStat stat;
     public string spriteName;
     public string associateSpriteName;  // For the guns, need to specify which gun connector its using
-    public Color color; // for light color
+    public Color32 color; // for light color
 
     // Extra abilites
     // ...
 
-    public TankPart(int id, int subId, Color color)
+    public TankPart(int id, int subId, Color32 color)
     {
         this.id = id;
         this.subId = subId;

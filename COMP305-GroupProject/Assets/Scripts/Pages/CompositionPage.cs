@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
+using Unity.VisualScripting;
 
 public class CompositionPage : CommonPage
 {
@@ -34,6 +35,9 @@ public class CompositionPage : CommonPage
         selectingTankParts = GameManager.Instance.GetCurrentTankParts();
         LoadTank();
 
+        currentTab = TankParts.Light;
+        availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
+
         tabMenu.selected.Subscribe(tab =>
         {
             if (tab == null) return;
@@ -57,37 +61,60 @@ public class CompositionPage : CommonPage
     public void OnClickLeftArrowBtn()
     {
         var part = availablePartList[Mathf.Abs(--selectingTankParts[currentTab].subId % availablePartList.Count)];
-        var sprite = AtlasLoader.Instance.GetSprite(part.spriteName);
-        Sprite sprite2 = null;
-
-        if(!string.IsNullOrEmpty(part.associateSpriteName))
-        {
-            sprite2 = AtlasLoader.Instance.GetSprite(part.associateSpriteName);
-        }
-
-        if(currentTab == TankParts.Gun || currentTab == TankParts.Track)
-            StartCoroutine(ChangeTankPartVertically(true, currentTab, sprite, sprite2));
+        if (currentTab == TankParts.Light)
+            StartCoroutine(ChangeTankColor(part.color));
         else
-            StartCoroutine(ChangeTankPartHorizontally(true, currentTab, sprite));
+        {
+            var sprite = AtlasLoader.Instance.GetSprite(part.spriteName);
+            Sprite sprite2 = null;
+
+            if (!string.IsNullOrEmpty(part.associateSpriteName))
+            {
+                sprite2 = AtlasLoader.Instance.GetSprite(part.associateSpriteName);
+            }
+
+            if (currentTab == TankParts.Gun || currentTab == TankParts.Track)
+                StartCoroutine(ChangeTankPartVertically(true, currentTab, sprite, sprite2));
+            else
+                StartCoroutine(ChangeTankPartHorizontally(true, currentTab, sprite));
+        }
     }
 
     public void OnClickRightArrowBtn()
     {
         var part = availablePartList[Mathf.Abs(++selectingTankParts[currentTab].subId % availablePartList.Count)];
-        var sprite = AtlasLoader.Instance.GetSprite(part.spriteName);
-        Sprite sprite2 = null;
 
-        if (!string.IsNullOrEmpty(part.associateSpriteName))
-        {
-            sprite2 = AtlasLoader.Instance.GetSprite(part.associateSpriteName);
-        }
-
-        if (currentTab == TankParts.Gun || currentTab == TankParts.Track)
-            StartCoroutine(ChangeTankPartVertically(false, currentTab, sprite, sprite2));
+        if (currentTab == TankParts.Light)
+            StartCoroutine(ChangeTankColor(part.color));
         else
-            StartCoroutine(ChangeTankPartHorizontally(false, currentTab, sprite));
+        {
+            var sprite = AtlasLoader.Instance.GetSprite(part.spriteName);
+            Sprite sprite2 = null;
+
+            if (!string.IsNullOrEmpty(part.associateSpriteName))
+            {
+                sprite2 = AtlasLoader.Instance.GetSprite(part.associateSpriteName);
+            }
+
+            if (currentTab == TankParts.Gun || currentTab == TankParts.Track)
+                StartCoroutine(ChangeTankPartVertically(false, currentTab, sprite, sprite2));
+            else
+                StartCoroutine(ChangeTankPartHorizontally(false, currentTab, sprite));
+        }
+        
     }
 
+    IEnumerator ChangeTankColor(Color32 color)
+    {
+        SetArrowVisible(false);
+
+        //var c = new Color32(color.r, color.g, color.b, 255);
+        lightImg.DOColor(color, 0.25f);
+        //lightImg.color = c;
+        yield return new WaitForSeconds(0f);
+
+        SetArrowVisible(true);
+    }
     IEnumerator ChangeTankPartHorizontally(bool isLeft, TankParts tankPart, Sprite s)
     {
         SetArrowVisible(false);
