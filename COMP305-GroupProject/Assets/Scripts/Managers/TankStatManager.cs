@@ -53,7 +53,7 @@ public class TankStatManager : MonoBehaviour
 
     public void CalculateTankStat()
     {
-        var newStat = new TankStat(0, 0, 0);
+        var newStat = new TankStat(0, 0, 0, 0);
     }
 
     //Modify the attributes data here
@@ -115,12 +115,12 @@ public class TankStatManager : MonoBehaviour
         }
     }
 
-    void GeneratePartsDataBy(TankParts type) 
+    void GeneratePartsDataBy(TankParts type)
     {
         string tankPart = "";
         int globalId = 0;
 
-        switch (type) 
+        switch (type)
         {
             case TankParts.Hull:
                 tankPart = "Hull";
@@ -160,10 +160,10 @@ public class TankStatManager : MonoBehaviour
                 new Color32(63, 128, 120, 255),
             };
 
-            foreach(var c in colors)
+            foreach (var c in colors)
             {
                 var id = globalId + j;
-                var tp = new TankPart(id, j, c);
+                var tp = new TankPart(id,j, type, c);
                 tempDictPart.Add(j, tp);
                 dictById.Add(id, tp);
                 j++;
@@ -174,29 +174,28 @@ public class TankStatManager : MonoBehaviour
             List<TankPartStatData> parts = new List<TankPartStatData>();
             parts = tankPartStatList.FindAll(x => x.type == tankPart);
 
-        foreach (var part in parts)
-        {
-            var id = globalId + j;
-            var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed, part.health), part.partName, tankPart == "Gun" ? part.assoPartName : "");
-            tempDictPart.Add(j, tp);
-            dictById.Add(id, tp);
-            j++;
+            foreach (var part in parts)
+            {
+                var id = globalId + j;
+                var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed, part.health), part.partName, tankPart == "Gun" ? part.assoPartName : "");
+                tempDictPart.Add(j, tp);
+                dictById.Add(id, tp);
+                j++;
+            }
         }
-
         dictByTankParts.Add(type, tempDictPart);
     }
 
     public List<TankPart> GetObtainedTankPart(TankParts parts)
     {
         // Do logic here..
-
         return dictByTankParts[parts].Values.ToList();
     }
 
     public TankPart GetTankPartData(TankParts parts, int id)
     {
         if (!dictByTankParts.ContainsKey(parts))
-            return new TankPart(0000, 0, Color.gray);
+            return new TankPart(0000, 0, parts, Color.gray);
         else
             return dictByTankParts[parts][id];
     }

@@ -50,11 +50,12 @@ public class TankPart
     // Extra abilites
     // ...
 
-    public TankPart(int id, int subId, Color32 color)
+    public TankPart(int id, int subId, TankParts parts, Color32 color)
     {
         this.id = id;
         this.subId = subId;
         this.color = color;
+        this.parts = parts;
     }
 
     public TankPart(int id, int subId, TankParts parts, TankStat stat, string spriteName, string assoSpriteName = "")
