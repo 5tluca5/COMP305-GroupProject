@@ -63,6 +63,11 @@ public class AttributeBar : MonoBehaviour
 
     public void SetValue(float value)
     {
+        if (currentValue != targetValue)
+            currentValue = targetValue;
+
+        timer = 0;
+
         targetValue = value;
     }
 }

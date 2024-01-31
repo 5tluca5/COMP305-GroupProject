@@ -29,6 +29,7 @@ public class CompositionPage : CommonPage
 
     // data
     TankParts currentTab = TankParts.Light;
+    int currentPartIndex = 0;
     List<TankPart> availablePartList;
     Dictionary<TankParts, TankPart> selectingTankParts = new Dictionary<TankParts, TankPart>();
     ReactiveProperty<TankStat> currentStat = new ReactiveProperty<TankStat>(new TankStat(0, 0, 0, 0));
@@ -40,6 +41,7 @@ public class CompositionPage : CommonPage
 
         currentTab = TankParts.Light;
         availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
+        currentPartIndex = availablePartList.IndexOf(selectingTankParts[currentTab]);
 
         tabMenu.selected.Subscribe(tab =>
         {
@@ -47,6 +49,7 @@ public class CompositionPage : CommonPage
 
             currentTab = (TankParts)tab.GetTabIndex();
             availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
+            currentPartIndex = availablePartList.IndexOf(selectingTankParts[currentTab]);
         }).AddTo(this);
 
         currentStat.Subscribe(stat =>
@@ -70,7 +73,7 @@ public class CompositionPage : CommonPage
 
     public void OnClickLeftArrowBtn()
     {
-        var part = availablePartList[Mathf.Abs(--selectingTankParts[currentTab].subId % availablePartList.Count)];
+        var part = availablePartList[Mathf.Abs(--currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
         RefreshAttribute();
 
@@ -98,7 +101,7 @@ public class CompositionPage : CommonPage
 
     public void OnClickRightArrowBtn()
     {
-        var part = availablePartList[Mathf.Abs(++selectingTankParts[currentTab].subId % availablePartList.Count)];
+        var part = availablePartList[Mathf.Abs(++currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
         RefreshAttribute();
 
