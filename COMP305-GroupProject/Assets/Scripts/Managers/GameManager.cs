@@ -61,4 +61,9 @@ public class GameManager : MonoBehaviour
             currentTankParts[tp.parts] = tp;
         }
     }
+
+    public TankStat GetCurrentTankStat()
+    {
+        return TankStatManager.Instance.CalculateTankStat(currentTankParts.Values.ToList());
+    }
 }
