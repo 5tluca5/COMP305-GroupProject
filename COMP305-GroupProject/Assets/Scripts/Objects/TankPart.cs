@@ -20,15 +20,15 @@ public enum AttributeType : int
 
 public struct TankStat
 {
-    public static float TankMaxDamage = 100;
-    public static float TankMaxFireRate = 50;
-    public static float TankMaxMovementSpeed = 15;
-    public static float TankMaxHealth = 150;
+    public static float TankMaxDamage = 250;
+    public static float TankMaxFireRate = 30;
+    public static float TankMaxMovementSpeed = 50;
+    public static float TankMaxHealth = 300;
 
     [Range(1, 100)] public float damage;
-    [Range(1, 50)] public float fireRate;
-    [Range(1, 15)] public float movementSpeed;
-    [Range(1, 50)] public float health;
+    [Range(1, 30)] public float fireRate;
+    [Range(1, 50)] public float movementSpeed;
+    [Range(1, 300)] public float health;
 
     public TankStat(float dmg, float fr, float ms, float hp)
     {
