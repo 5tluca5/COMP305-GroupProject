@@ -133,19 +133,19 @@ public class PlayerController : PlayerTank
         {
             case Direction.Left:
                 if (left && transform.localEulerAngles.z == 90)
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 5));
+                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
                 break;
             case Direction.Right:
                 if (right && transform.localEulerAngles.z == 270)
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 5));
+                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
                 break;
             case Direction.Up:
                 if (up && (transform.localEulerAngles.z <= 0.001 && transform.localEulerAngles.z >= -0.001))
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 5));
+                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
                 break;
             case Direction.Down:
                 if (down && transform.localEulerAngles.z == 180)
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 5));
+                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
                 break;
         }
     }
