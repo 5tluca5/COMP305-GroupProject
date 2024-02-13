@@ -84,4 +84,19 @@ public class GameManager : MonoBehaviour
         _enemySpawnerManager.SpawnBossTank();
     }
     #endregion
+
+    public TankStat GetEnemyTankStat(EnemyTankType type)
+    {
+        switch(type)
+        {
+            case EnemyTankType.Normal:
+                return new TankStat(1, 5, 10, 3);
+            case EnemyTankType.Elite:
+                return new TankStat(3, 10, 10, 10);
+            case EnemyTankType.Boss:
+                return new TankStat(5, 15, 15, 20);
+        }
+
+        return new TankStat(1, 5, 10, 3);
+    }
 }

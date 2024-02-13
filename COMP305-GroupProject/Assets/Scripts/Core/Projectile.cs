@@ -32,11 +32,11 @@ public class Projectile : MonoBehaviour
         this.speed = speed == 0 ? this.speed : speed;
     }
 
-    public void Shot()
+    public void Shot(Vector2 direction)
     {
         if (body.velocity.magnitude > 0) return;
 
-        body.AddForce(Vector2.up * this.speed);
+        body.AddForce(direction * this.speed);
     }
 
     [ContextMenu("Do Something")]
@@ -48,7 +48,8 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        var effect = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        effect.transform.localScale *= transform.localScale.x;
         Destroy(gameObject);
     }
 }
