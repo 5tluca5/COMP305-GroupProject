@@ -182,7 +182,6 @@ public class PlayerController : PlayerTank
 
         if (Input.GetKey(fireKey))
         {
-
             if (fireTimer >= fireRate)
             {
                 Fire();

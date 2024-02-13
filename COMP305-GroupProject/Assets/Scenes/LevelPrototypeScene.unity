@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 15173284}
   - component: {fileID: 15173285}
   m_Layer: 0
-  m_Name: Tile-SpawnPoint (15)
+  m_Name: EnemySpawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5850,6 +5850,57 @@ MonoBehaviour:
   - {fileID: 5867355338401054516, guid: b114953c5c913db499614f92e5a76e68, type: 3}
   - {fileID: 5867355338401054516, guid: b114953c5c913db499614f92e5a76e68, type: 3}
   - {fileID: 10455276335100606, guid: 2317a8c3bc30bf744baf482b0c2d76f4, type: 3}
+--- !u!1 &153974471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153974473}
+  - component: {fileID: 153974472}
+  m_Layer: 0
+  m_Name: EnemySpawnerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153974472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153974471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122483e1fc6acbb45b43cacdafeb44b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySpawn:
+  - {fileID: 1715525275}
+  - {fileID: 603884564}
+  - {fileID: 15173284}
+  _enemyTanks: []
+  _miniBossTanks: []
+  _bossTanks: []
+--- !u!4 &153974473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153974471}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.279114, y: -2.4309082, z: -0.76015234}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175694817
 GameObject:
   m_ObjectHideFlags: 0
@@ -10563,7 +10614,7 @@ GameObject:
   - component: {fileID: 603884565}
   - component: {fileID: 603884566}
   m_Layer: 0
-  m_Name: Tile-SpawnPoint (7)
+  m_Name: EnemySpawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25283,13 +25334,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1715525275}
+  - {fileID: 603884564}
+  - {fileID: 15173284}
   - {fileID: 1622389488}
   - {fileID: 494360490}
   - {fileID: 651651419}
   - {fileID: 1897852287}
   - {fileID: 1518659512}
   - {fileID: 77062537}
-  - {fileID: 603884564}
   - {fileID: 745601066}
   - {fileID: 1838574455}
   - {fileID: 573616084}
@@ -25297,7 +25349,6 @@ Transform:
   - {fileID: 703404373}
   - {fileID: 1411606875}
   - {fileID: 1741298143}
-  - {fileID: 15173284}
   - {fileID: 934887764}
   - {fileID: 1420619468}
   - {fileID: 1483204005}
@@ -34405,7 +34456,7 @@ GameObject:
   - component: {fileID: 1715525276}
   - component: {fileID: 1715525277}
   m_Layer: 0
-  m_Name: Tile-SpawnPoint
+  m_Name: EnemySpawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39558,6 +39609,7 @@ SceneRoots:
   - {fileID: 955043773316899675}
   - {fileID: 952305667}
   - {fileID: 795935750}
+  - {fileID: 153974473}
   - {fileID: 37038454}
   - {fileID: 1359266814}
   - {fileID: 986920122}

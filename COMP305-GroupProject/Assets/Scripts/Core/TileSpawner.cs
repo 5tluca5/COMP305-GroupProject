@@ -9,6 +9,7 @@ public class TileSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(gameObjects[Random.Range(0, gameObjects.Length - 1)], transform.position, Quaternion.identity);
+        GameObject temp = Instantiate(gameObjects[Random.Range(0, gameObjects.Length - 1)], transform.position, Quaternion.identity);
+        temp.transform.SetParent(this.transform);
     }
 }
