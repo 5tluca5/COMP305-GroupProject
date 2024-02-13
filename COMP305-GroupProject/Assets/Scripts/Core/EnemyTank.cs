@@ -104,16 +104,27 @@ public class EnemyTank : Tank
             }
         }
 
-        if (IsfacingObstacle() || IsfacingWall() || lastDirection == Direction.Down)
+        //if (IsfacingObstacle() || IsfacingWall() || lastDirection == Direction.Down)
+        //{
+        //    changeDirectionTimer += Time.deltaTime;
+        //}
+
+        //if (IsfacingObstacle() || IsfacingWall() || changeDirectionTimer >= changeDirectionTime)
+        //{
+        //    lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
+        //    DoRotation(lastDirection);
+        //    changeDirectionTimer = 0;
+        //}
+        if (IsfacingObstacle() || IsfacingWall())
         {
             changeDirectionTimer += Time.deltaTime;
-        }
 
-        if (IsfacingObstacle() || IsfacingWall() || changeDirectionTimer >= changeDirectionTime)
-        {
-            lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
-            DoRotation(lastDirection);
-            changeDirectionTimer = 0;
+            if(changeDirectionTimer >= changeDirectionTime)
+            {
+                lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
+                DoRotation(lastDirection);
+                changeDirectionTimer = 0;
+            }
         }
         else
         {
