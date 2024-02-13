@@ -609,7 +609,7 @@ MonoBehaviour:
   gunConnectorImg: {fileID: 0}
   gunImg: {fileID: 0}
   rotationSpeed: 0.2
-  projectilePrefab: {fileID: 8418094924654087315, guid: 0847a78005bad624595bea7f827ebf25, type: 3}
+  projectilePrefab: {fileID: 8418094924654087315, guid: 70e4225073b81b34c9cd16c1f31d93c7, type: 3}
   firePoint: {fileID: 7015486215502318064}
   type: 1
 --- !u!1 &5426658026897714928
