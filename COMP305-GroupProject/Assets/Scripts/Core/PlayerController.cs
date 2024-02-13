@@ -9,7 +9,6 @@ using UnityEditor;
 
 public class PlayerController : PlayerTank
 {
-
     [Header("Controll Keys")]
     [SerializeField] KeyCode leftKey = KeyCode.LeftArrow;
     [SerializeField] KeyCode rightKey = KeyCode.RightArrow;
@@ -147,19 +146,19 @@ public class PlayerController : PlayerTank
             {
                 case Direction.Left:
                     if (left && curRotation == 90)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * horizontal));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT * horizontal));
                     break;
                 case Direction.Right:
                     if (right && curRotation == 270)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * horizontal));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT * horizontal));
                     break;
                 case Direction.Up:
                     if (up && (curRotation <= 0.001 && curRotation >= -0.001))
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * vertical));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT * vertical));
                     break;
                 case Direction.Down:
                     if (down && curRotation == 180)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * vertical));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT * vertical));
                     break;
             }
         }

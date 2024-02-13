@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 201026408223482944}
   - component: {fileID: 4272347752135382283}
   - component: {fileID: 8828846321708748431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: bullet
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -128,7 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 2320919231216661796, guid: 09d46d538274b354ab425ee68a9804f9, type: 3}
   damage: 0
-  speed: 10000
+  speed: 1000
+  isPlayer: 0
 --- !u!60 &8828846321708748431
 PolygonCollider2D:
   m_ObjectHideFlags: 0
