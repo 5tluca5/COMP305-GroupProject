@@ -33,7 +33,7 @@ public class PlayerController : PlayerTank
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(firePoint.position, new Vector3(2.2f, 0.5f));
+        Gizmos.DrawWireCube(wallDetection.position, new Vector3(2.2f, 0.5f));
     }
     private void HandleMovement()
     {

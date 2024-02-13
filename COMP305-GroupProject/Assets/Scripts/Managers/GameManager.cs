@@ -92,11 +92,11 @@ public class GameManager : MonoBehaviour
         switch(type)
         {
             case EnemyTankType.Normal:
-                return new TankStat(1, 3, 3, 30);
+                return new TankStat(30, 3, 3, 30);
             case EnemyTankType.Elite:
-                return new TankStat(3, 5, 4, 100);
+                return new TankStat(90, 5, 4, 100);
             case EnemyTankType.Boss:
-                return new TankStat(5, 10, 2, 300);
+                return new TankStat(150, 10, 2, 300);
         }
 
         return new TankStat(1, 5, 10, 3);

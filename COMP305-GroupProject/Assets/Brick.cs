@@ -37,15 +37,13 @@ public class Brick : MonoBehaviour
     {
         // do the logic here
         _hp -= data.damage;
-        if (_hp >= 90)
+        if (_hp >= 80 && _hp <= 150)
         {
             _brickRenderer.sprite = _brickImages[1];
-        }
-        if (_hp <= 50)
+        }else if (_hp >= 1)
         {
             _brickRenderer.sprite = _brickImages[0];
-        }
-        if (_hp <= 0)
+        }else 
         {
             Destroy(this.gameObject);
         }

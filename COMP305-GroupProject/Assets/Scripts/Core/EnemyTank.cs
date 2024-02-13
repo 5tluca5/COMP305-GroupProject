@@ -90,8 +90,7 @@ public class EnemyTank : Tank
     public void Spawn(Subject<EnemyTank> onDestroy)
     {
         isSpawned = true;
-
-        lastDirection = Direction.Down;
+        DoRotation(Direction.Down);
     }
 
     void HandleNormalAI()
@@ -115,19 +114,30 @@ public class EnemyTank : Tank
         //    DoRotation(lastDirection);
         //    changeDirectionTimer = 0;
         //}
-        if (IsfacingObstacle() || IsfacingWall())
+        if(IsfacingWall())
         {
-            changeDirectionTimer += Time.deltaTime;
-
-            if(changeDirectionTimer >= changeDirectionTime)
-            {
-                lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
-                DoRotation(lastDirection);
-                changeDirectionTimer = 0;
-            }
+            changeDirectionTimer += Time.deltaTime * 2f;
         }
-        else
+        else if(IsfacingObstacle())
         {
+            changeDirectionTimer += Time.deltaTime * 0.5f;
+        }
+
+        if (changeDirectionTimer >= changeDirectionTime)
+        {
+            Direction newDir = lastDirection;
+            do
+            {
+                newDir = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
+            } while (newDir != lastDirection);
+
+            lastDirection = newDir;
+            DoRotation(lastDirection);
+            changeDirectionTimer = 0;
+        }
+        else if(!IsfacingObstacle() && !IsfacingWall())
+        {
+            changeDirectionTimer += Time.deltaTime * 0.3f;
             var curRotation = transform.localEulerAngles.z;
 
             switch (lastDirection)

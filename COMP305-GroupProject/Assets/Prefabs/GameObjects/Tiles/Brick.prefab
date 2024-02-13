@@ -186,4 +186,4 @@ MonoBehaviour:
   - {fileID: -230343770, guid: fd0e12313560b48a6906786fc3d5172b, type: 3}
   - {fileID: 12285286, guid: fd0e12313560b48a6906786fc3d5172b, type: 3}
   _brickRenderer: {fileID: 6474606725045072851}
-  _hp: 2
+  _hp: 150
