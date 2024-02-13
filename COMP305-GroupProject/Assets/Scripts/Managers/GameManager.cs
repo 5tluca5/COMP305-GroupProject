@@ -25,11 +25,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("Atlas Count: " + AtlasLoader.Instance.AtlasCount());
 
         TankStatManager.Instance.Init();
-
+        _enemySpawnerManager = EnemySpawnerManager.Instance;
         LoadData();
     }
 
-    Dictionary<TankParts, TankPart> currentTankParts = new Dictionary<TankParts, TankPart>(); 
+    Dictionary<TankParts, TankPart> currentTankParts = new Dictionary<TankParts, TankPart>();
+
+    private EnemySpawnerManager _enemySpawnerManager;
 
     private void Start()
     {
@@ -66,4 +68,20 @@ public class GameManager : MonoBehaviour
     {
         return TankStatManager.Instance.CalculateTankStat(currentTankParts.Values.ToList());
     }
+
+    #region - Enemy Spawn
+
+    public void SpawnEnemyTank() 
+    {
+        _enemySpawnerManager.SpawnEnemyTank();
+    }
+    public void SpawnMiniBossTank()
+    {
+        _enemySpawnerManager.SpawnMiniBossTank();
+    }
+    public void SpawnBossTank()
+    {
+        _enemySpawnerManager.SpawnBossTank();
+    }
+    #endregion
 }
