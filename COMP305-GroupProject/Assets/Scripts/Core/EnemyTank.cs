@@ -30,15 +30,15 @@ public class EnemyTank : Tank
         fireRate = 1 / (stat.fireRate * 0.1f);
         rotationSpeed = 0.2f;
 
-        switch(type)
+        switch (type)
         {
-                case EnemyTankType.Normal:
+            case EnemyTankType.Normal:
                 changeDirectionTime = 1f;
                 break;
-                case EnemyTankType.Elite:
+            case EnemyTankType.Elite:
                 changeDirectionTime = 1f;
                 break;
-                case EnemyTankType.Boss:
+            case EnemyTankType.Boss:
                 changeDirectionTime = 0.2f;
                 break;
         }
@@ -46,12 +46,12 @@ public class EnemyTank : Tank
 
     protected override void BeingHit(ProjectileData data)
     {
-        if(data.isPlayer)
+        if (data.isPlayer)
         {
             stat.health -= data.damage;
         }
 
-        if(stat.health <= 0f)
+        if (stat.health <= 0f)
         {
             //Do explosion?
 
@@ -65,7 +65,7 @@ public class EnemyTank : Tank
 
         playerBase = GameObject.FindGameObjectWithTag("playerBase").transform;
         //Debug
-        Spawn(null);
+        //Spawn(null);
     }
 
     protected override void Update()
@@ -74,7 +74,7 @@ public class EnemyTank : Tank
 
         base.Update();
 
-        switch(type)
+        switch (type)
         {
             case EnemyTankType.Normal:
                 HandleNormalAI();
@@ -82,7 +82,7 @@ public class EnemyTank : Tank
             case EnemyTankType.Elite:
                 HandleEliteAI();
                 break;
-            case EnemyTankType.Boss: 
+            case EnemyTankType.Boss:
                 break;
         }
     }
@@ -96,24 +96,24 @@ public class EnemyTank : Tank
 
     void HandleNormalAI()
     {
-        if(fireTimer > fireRate)
+        if (fireTimer > fireRate)
         {
-            if(Random.Range(0, 3) %2 == 1)
+            if (Random.Range(0, 3) % 2 == 1)
             {
                 Fire();
             }
         }
 
-        if(IsfacingObstacle() || IsfacingWall() || lastDirection == Direction.Down)
+        if (IsfacingObstacle() || IsfacingWall() || lastDirection == Direction.Down)
         {
             changeDirectionTimer += Time.deltaTime;
+        }
 
-            if (changeDirectionTimer >= changeDirectionTime)
-            {
-                lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
-                DoRotation(lastDirection);
-                changeDirectionTimer = 0;
-            }
+        if (IsfacingObstacle() || IsfacingWall() || changeDirectionTimer >= changeDirectionTime)
+        {
+            lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
+            DoRotation(lastDirection);
+            changeDirectionTimer = 0;
         }
         else
         {

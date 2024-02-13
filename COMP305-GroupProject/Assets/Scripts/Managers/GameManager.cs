@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //_enemySpawnerManager.SetEnabled(true);
+        var testData = new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+        _enemySpawnerManager.Setup(testData.Select(x => (EnemyTankType)x).ToList(), 3);
+        _enemySpawnerManager.SetEnabled(true);
     }
 
     void LoadData()
