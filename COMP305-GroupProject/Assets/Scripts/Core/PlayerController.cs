@@ -44,7 +44,7 @@ public class PlayerController : PlayerTank
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(firePoint.position, new Vector3(2f, 0.5f));
+        Gizmos.DrawWireCube(firePoint.position, new Vector3(2.2f, 0.5f));
     }
     private void HandleMovement()
     {
@@ -52,6 +52,9 @@ public class PlayerController : PlayerTank
         var right = Input.GetKey(rightKey);
         var up = Input.GetKey(upKey);
         var down = Input.GetKey(downKey);
+
+        var horizontal = Mathf.Abs(Input.GetAxis("Horizontal"));
+        var vertical = Mathf.Abs(Input.GetAxis("Vertical"));
 
         if (!left && !right && !up && !down)
         {
@@ -147,9 +150,9 @@ public class PlayerController : PlayerTank
         var curRotation = transform.localEulerAngles.z;
 
         if (curRotation == 90 || curRotation == 270)
-            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(0.5f, 2f), 0, detectLayer);
+            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(0.5f, 2.2f), 0, detectLayer);
         else
-            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(2f, 0.5f), 0, detectLayer);
+            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(2.2f, 0.5f), 0, detectLayer);
 
         if (!blocked)
         {
@@ -157,19 +160,19 @@ public class PlayerController : PlayerTank
             {
                 case Direction.Left:
                     if (left && curRotation == 90)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * horizontal));
                     break;
                 case Direction.Right:
                     if (right && curRotation == 270)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * horizontal));
                     break;
                 case Direction.Up:
                     if (up && (curRotation <= 0.001 && curRotation >= -0.001))
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * vertical));
                     break;
                 case Direction.Down:
                     if (down && curRotation == 180)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * vertical));
                     break;
             }
         }

@@ -12,16 +12,16 @@ public class Brick : MonoBehaviour
     [SerializeField]
     private int _hp = 2;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("bullet")) 
+        if (collision.gameObject.CompareTag("bullet"))
         {
-            _hp--; 
+            _hp--;
             if (_hp == 1)
             {
                 _brickRenderer.sprite = _brickImages[_hp];
             }
-            if (_hp == 0) 
+            if (_hp == 0)
             {
                 Destroy(this.gameObject);
             }
