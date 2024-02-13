@@ -22,14 +22,15 @@ public class PlayerController : PlayerTank
     [SerializeField] KeyCode rightKey = KeyCode.RightArrow;
     [SerializeField] KeyCode upKey = KeyCode.UpArrow;
     [SerializeField] KeyCode downKey = KeyCode.DownArrow;
+    [SerializeField] KeyCode fireKey = KeyCode.Space;
 
     [SerializeField] Direction curDireciton = Direction.None;
     Stack<Direction> inputs = new Stack<Direction>();
 
-    private void LateUpdate()
+    private void Update()
     {
         HandleMovement();
-
+        HandleFire();
     }
 
     private void HandleMovement()
@@ -150,6 +151,22 @@ public class PlayerController : PlayerTank
         }
     }
 
+    private void HandleFire()
+    {
+        fireTimer += Time.deltaTime;
+
+        if (Input.GetKeyDown(fireKey))
+        {
+
+            if (fireTimer >= fireRate)
+            {
+                Fire();
+
+                fireTimer = 0;
+            }
+        }
+    }
+
     void DoRotation(Direction direction)
     {
         //Debug.Log("Transform rotation: " + transform.localRotation + " Transform localEulerAngles: " + transform.localEulerAngles);
@@ -171,12 +188,7 @@ public class PlayerController : PlayerTank
                 break;
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     void PrintDebug()
     {
         string log = "";

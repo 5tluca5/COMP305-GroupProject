@@ -17,6 +17,12 @@ public abstract class Tank : MonoBehaviour
     [Header("Tank Stat")]
     [SerializeField] protected TankStat stat;
 
+    [Header("Fire")]
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Transform firePoint;
+    protected float fireRate = 1f;
+    protected float fireTimer = 0f;
+
     protected AtlasLoader atlasLoader = AtlasLoader.Instance;
 
     abstract protected void SetupTank();
@@ -24,5 +30,15 @@ public abstract class Tank : MonoBehaviour
     virtual protected void Start()
     {
         SetupTank();
+    }
+
+    virtual protected void Fire()
+    {
+        if (fireTimer < fireRate) return;
+
+        var projectile = Instantiate(projectilePrefab, transform).GetComponent<Projectile>();
+        projectile.transform.position = firePoint.position;
+        projectile.Setup(stat.damage);
+        projectile.Shot();
     }
 }

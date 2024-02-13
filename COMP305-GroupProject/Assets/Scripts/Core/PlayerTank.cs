@@ -12,6 +12,8 @@ public class PlayerTank : Tank
         stat = GameManager.Instance.GetCurrentTankStat();
         tankParts = GameManager.Instance.GetCurrentTankParts();
 
+        fireRate = 1 / (stat.fireRate * 0.1f);
+
         trackLImg.sprite = trackRImg.sprite = AtlasLoader.Instance.GetSprite(tankParts[TankParts.Track].spriteName);
         towerImg.sprite = AtlasLoader.Instance.GetSprite(tankParts[TankParts.Tower].spriteName);
         hullImg.sprite = AtlasLoader.Instance.GetSprite(tankParts[TankParts.Hull].spriteName);
