@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UniRx;
 using System.Linq;
 using DG.Tweening;
+using UnityEditor;
 
 public enum Direction : int
 {
@@ -17,6 +18,8 @@ public enum Direction : int
 
 public class PlayerController : PlayerTank
 {
+    [SerializeField] LayerMask detectLayer;
+
     [Header("Controll Keys")]
     [SerializeField] KeyCode leftKey = KeyCode.LeftArrow;
     [SerializeField] KeyCode rightKey = KeyCode.RightArrow;
@@ -27,12 +30,22 @@ public class PlayerController : PlayerTank
     [SerializeField] Direction curDireciton = Direction.None;
     Stack<Direction> inputs = new Stack<Direction>();
 
-    private void Update()
+    private bool blocked = false;
+
+    override protected void Update()
     {
+        base.Update();
+
         HandleMovement();
         HandleFire();
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(firePoint.position, new Vector3(2f, 0.5f));
+    }
     private void HandleMovement()
     {
         var left = Input.GetKey(leftKey);
@@ -130,65 +143,53 @@ public class PlayerController : PlayerTank
         //            transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * -1 * 5));
         //        break;
         //}
-        switch (curDireciton)
+
+        var curRotation = transform.localEulerAngles.z;
+
+        if (curRotation == 90 || curRotation == 270)
+            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(0.5f, 2f), 0, detectLayer);
+        else
+            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(2f, 0.5f), 0, detectLayer);
+
+        if (!blocked)
         {
-            case Direction.Left:
-                if (left && transform.localEulerAngles.z == 90)
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
-                break;
-            case Direction.Right:
-                if (right && transform.localEulerAngles.z == 270)
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
-                break;
-            case Direction.Up:
-                if (up && (transform.localEulerAngles.z <= 0.001 && transform.localEulerAngles.z >= -0.001))
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
-                break;
-            case Direction.Down:
-                if (down && transform.localEulerAngles.z == 180)
-                    transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
-                break;
+            switch (curDireciton)
+            {
+                case Direction.Left:
+                    if (left && curRotation == 90)
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                    break;
+                case Direction.Right:
+                    if (right && curRotation == 270)
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                    break;
+                case Direction.Up:
+                    if (up && (curRotation <= 0.001 && curRotation >= -0.001))
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                    break;
+                case Direction.Down:
+                    if (down && curRotation == 180)
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1 * 1));
+                    break;
+            }
         }
+        
     }
 
     private void HandleFire()
     {
         fireTimer += Time.deltaTime;
 
-        if (Input.GetKeyDown(fireKey))
+        if (Input.GetKey(fireKey))
         {
 
             if (fireTimer >= fireRate)
             {
                 Fire();
-
-                fireTimer = 0;
             }
         }
     }
 
-    void DoRotation(Direction direction)
-    {
-        //Debug.Log("Transform rotation: " + transform.localRotation + " Transform localEulerAngles: " + transform.localEulerAngles);
-        var curRotation = transform.localEulerAngles.z;
-
-        switch (direction)
-        {
-            case Direction.Left:
-                transform.DORotate(new Vector3(0, 0, 90), curRotation == 270 ? 0.4f : 0.2f);
-                break;
-            case Direction.Right:
-                transform.DORotate(new Vector3(0, 0, -90), curRotation == 90 ? 0.4f : 0.2f);
-                break;
-            case Direction.Up:
-                transform.DORotate(new Vector3(0, 0, 0), curRotation == 180 ? 0.4f : 0.2f);
-                break;
-            case Direction.Down:
-                transform.DORotate(new Vector3(0, 0, -180), curRotation == 0 ? 0.4f : 0.2f);
-                break;
-        }
-    }
-    
     void PrintDebug()
     {
         string log = "";
