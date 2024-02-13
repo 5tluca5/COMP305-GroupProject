@@ -3,9 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Collections.AllocatorManager;
+
+public enum Direction : int
+{
+    Left = 0,
+    Right,
+    Down,
+    Up,
+    None
+}
 
 public abstract class Tank : MonoBehaviour
 {
+    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] LayerMask wallLayer;
+
     [Header("Tank Part Images")]
     [SerializeField] protected SpriteRenderer lightImg;
     [SerializeField] protected SpriteRenderer trackLImg;
@@ -31,6 +44,8 @@ public abstract class Tank : MonoBehaviour
     protected AtlasLoader atlasLoader = AtlasLoader.Instance;
 
     abstract protected void SetupTank();
+    abstract protected void BeingHit(ProjectileData data);
+
 
     virtual protected void Start()
     {
@@ -39,10 +54,17 @@ public abstract class Tank : MonoBehaviour
 
     virtual protected void Update()
     {
-        isRotating -= Time.deltaTime;
+        if(isRotating > 0f)
+        {
+            isRotating -= Time.deltaTime;
+
+            isRotating = Mathf.Max(0, isRotating);
+        }
+
+        fireTimer += Time.deltaTime;
     }
 
-    virtual protected void Fire()
+    virtual protected void Fire(bool isPlayer = false)
     {
 
         if (fireTimer < fireRate) return;
@@ -55,7 +77,7 @@ public abstract class Tank : MonoBehaviour
             projectile.transform.position = firePoint.position;
             projectile.transform.localScale *= transform.localScale.x;
             projectile.transform.rotation = transform.rotation;
-            projectile.Setup(stat.damage);
+            projectile.Setup(isPlayer, stat.damage);
             projectile.Shot(lastDirection == Direction.Left ? Vector2.left : lastDirection == Direction.Down ? Vector2.down : lastDirection == Direction.Right ? Vector2.right : Vector2.up);
 
             fireTimer = 0f;
@@ -66,7 +88,6 @@ public abstract class Tank : MonoBehaviour
     virtual protected void DoRotation(Direction direction)
     {
         var curRotation = transform.localEulerAngles.z;
-
 
         switch (direction)
         {
@@ -90,5 +111,26 @@ public abstract class Tank : MonoBehaviour
 
         isRotating *= 0.9f;
         lastDirection = direction;
+    }
+
+    protected bool IsfacingObstacle()
+    {
+        var curRotation = transform.localEulerAngles.z;
+
+        if (curRotation == 90 || curRotation == 270)
+            return Physics2D.OverlapBox(firePoint.position, new Vector2(0.5f, 2.2f), 0, obstacleLayer);
+        else
+            return Physics2D.OverlapBox(firePoint.position, new Vector2(2.2f, 0.5f), 0, obstacleLayer);
+
+    }
+    protected bool IsfacingWall()
+    {
+        var curRotation = transform.localEulerAngles.z;
+
+        if (curRotation == 90 || curRotation == 270)
+            return Physics2D.OverlapBox(firePoint.position, new Vector2(0.5f, 2.2f), 0, wallLayer);
+        else
+            return Physics2D.OverlapBox(firePoint.position, new Vector2(2.2f, 0.5f), 0, wallLayer);
+
     }
 }

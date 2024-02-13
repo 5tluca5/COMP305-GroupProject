@@ -7,18 +7,8 @@ using System.Linq;
 using DG.Tweening;
 using UnityEditor;
 
-public enum Direction : int
-{
-    Left = 0,
-    Right,
-    Up,
-    Down,
-    None
-}
-
 public class PlayerController : PlayerTank
 {
-    [SerializeField] LayerMask detectLayer;
 
     [Header("Controll Keys")]
     [SerializeField] KeyCode leftKey = KeyCode.LeftArrow;
@@ -149,10 +139,7 @@ public class PlayerController : PlayerTank
 
         var curRotation = transform.localEulerAngles.z;
 
-        if (curRotation == 90 || curRotation == 270)
-            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(0.5f, 2.2f), 0, detectLayer);
-        else
-            blocked = Physics2D.OverlapBox(firePoint.position, new Vector2(2.2f, 0.5f), 0, detectLayer);
+        blocked = IsfacingObstacle();
 
         if (!blocked)
         {
@@ -181,13 +168,11 @@ public class PlayerController : PlayerTank
 
     private void HandleFire()
     {
-        fireTimer += Time.deltaTime;
-
         if (Input.GetKey(fireKey))
         {
             if (fireTimer >= fireRate)
             {
-                Fire();
+                Fire(true);
             }
         }
     }

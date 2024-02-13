@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        //_enemySpawnerManager.SetEnabled(true);
     }
 
     void LoadData()
@@ -71,18 +71,18 @@ public class GameManager : MonoBehaviour
 
     #region - Enemy Spawn
 
-    public void SpawnEnemyTank() 
-    {
-        _enemySpawnerManager.SpawnEnemyTank();
-    }
-    public void SpawnMiniBossTank()
-    {
-        _enemySpawnerManager.SpawnMiniBossTank();
-    }
-    public void SpawnBossTank()
-    {
-        _enemySpawnerManager.SpawnBossTank();
-    }
+    //public void SpawnEnemyTank() 
+    //{
+    //    _enemySpawnerManager.SpawnEnemyTank();
+    //}
+    //public void SpawnMiniBossTank()
+    //{
+    //    _enemySpawnerManager.SpawnMiniBossTank();
+    //}
+    //public void SpawnBossTank()
+    //{
+    //    _enemySpawnerManager.SpawnBossTank();
+    //}
     #endregion
 
     public TankStat GetEnemyTankStat(EnemyTankType type)
@@ -90,11 +90,11 @@ public class GameManager : MonoBehaviour
         switch(type)
         {
             case EnemyTankType.Normal:
-                return new TankStat(1, 5, 10, 3);
+                return new TankStat(1, 3, 3, 30);
             case EnemyTankType.Elite:
-                return new TankStat(3, 10, 10, 10);
+                return new TankStat(3, 5, 4, 100);
             case EnemyTankType.Boss:
-                return new TankStat(5, 15, 15, 20);
+                return new TankStat(5, 10, 2, 300);
         }
 
         return new TankStat(1, 5, 10, 3);

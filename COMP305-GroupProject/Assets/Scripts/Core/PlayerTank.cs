@@ -20,4 +20,19 @@ public class PlayerTank : Tank
         gunImg.sprite = AtlasLoader.Instance.GetSprite(tankParts[TankParts.Gun].spriteName);
         gunConnectorImg.sprite = AtlasLoader.Instance.GetSprite(tankParts[TankParts.Gun].associateSpriteName);
     }
+
+    protected override void BeingHit(ProjectileData data)
+    {
+        if (!data.isPlayer)
+        {
+            stat.health -= data.damage;
+        }
+
+        if (stat.health <= 0f)
+        {
+            // GG
+            Debug.Log("Gameover");
+            Time.timeScale = 0f;
+        }
+    }
 }

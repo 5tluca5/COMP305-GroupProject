@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class BreakableBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private int _hp = 1;
 
-    // Update is called once per frame
-    void Update()
+    public void BeingHit(ProjectileData data)
     {
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
+        // do the logic here
+        _hp--;
+        if (_hp == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

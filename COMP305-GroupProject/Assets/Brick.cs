@@ -14,18 +14,20 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("bullet"))
-        {
-            _hp--;
-            if (_hp == 1)
-            {
-                _brickRenderer.sprite = _brickImages[_hp];
-            }
-            if (_hp == 0)
-            {
-                Destroy(this.gameObject);
-            }
+        
+    }
 
+    public void BeingHit(ProjectileData data)
+    {
+        // do the logic here
+        _hp--;
+        if (_hp == 1)
+        {
+            _brickRenderer.sprite = _brickImages[_hp];
+        }
+        if (_hp == 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
