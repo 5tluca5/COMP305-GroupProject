@@ -55,6 +55,11 @@ public class Projectile : MonoBehaviour
         body.AddForce(direction * this.speed);
     }
 
+    public float GetDamage() 
+    {
+        return damage;
+    }
+
     [ContextMenu("Do Something")]
     void AddForce()
     {
