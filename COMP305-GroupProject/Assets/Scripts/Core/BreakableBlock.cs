@@ -10,6 +10,13 @@ public class BreakableBlock : MonoBehaviour
     public void BeingHit(ProjectileData data)
     {
         // do the logic here
+
+        //Unbreakable Block
+        if (gameObject.layer == 7)
+        {
+            return;
+        }
+
         _hp--;
         if (_hp == 0)
         {
