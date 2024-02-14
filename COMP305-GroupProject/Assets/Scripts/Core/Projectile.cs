@@ -32,7 +32,6 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -52,6 +51,7 @@ public class Projectile : MonoBehaviour
     {
         if (body.velocity.magnitude > 0) return;
 
+        SoundManager.Instance.PlaySound("Shoot");
         body.AddForce(direction * this.speed);
     }
 
@@ -72,6 +72,7 @@ public class Projectile : MonoBehaviour
         collision.gameObject.SendMessage("BeingHit", new ProjectileData(damage, isPlayer), SendMessageOptions.DontRequireReceiver);
 
         var effect = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        SoundManager.Instance.PlaySound("Explosion");
         effect.transform.localScale *= transform.localScale.x;
         Destroy(gameObject);
     }
