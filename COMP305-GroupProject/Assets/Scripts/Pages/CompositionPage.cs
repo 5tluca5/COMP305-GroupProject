@@ -76,7 +76,7 @@ public class CompositionPage : CommonPage
         var part = availablePartList[Mathf.Abs(--currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
         //RefreshAttribute();
-
+        SoundManager.Instance.PlaySound("PartSwitch");
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
         else
@@ -104,7 +104,7 @@ public class CompositionPage : CommonPage
         var part = availablePartList[Mathf.Abs(++currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
         //RefreshAttribute();
-
+        SoundManager.Instance.PlaySound("PartSwitch");
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
         else
