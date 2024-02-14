@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2970775919505393318}
   - component: {fileID: 8307760498980519426}
   m_Layer: 5
-  m_Name: BackBtn
+  m_Name: Volume2Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 91f687269d00d8548a0c2a0e7e4736e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e153e7320d1c3b247b8dd9913128265a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -156,7 +156,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 40, y: 0}
-  m_SizeDelta: {x: 143.171, y: 60}
+  m_SizeDelta: {x: 195.8292, y: 60}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3069745327077598383
 CanvasRenderer:
@@ -199,4 +199,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back
+  m_Text: 'Volume
+
+'
