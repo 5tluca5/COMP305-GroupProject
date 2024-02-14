@@ -249,5 +249,6 @@ public class CompositionPage : CommonPage
         GameManager.Instance.SetCurrentTankParts(selectingTankParts.Values.ToList());
 
         SceneManager.LoadScene("LevelPrototypeScene");
+        SoundManager.Instance.PlayMusic("Level1");
     }
 }
