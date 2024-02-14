@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 5397351760948299098}
   m_Layer: 3
   m_Name: PlayerTank
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,6 +312,8 @@ MonoBehaviour:
   towerImg: {fileID: 3382630151522619523}
   gunConnectorImg: {fileID: 3148441926347187577}
   gunImg: {fileID: 132828306077691512}
+  curHealth:
+    value: 100
   rotationSpeed: 0.2
   projectilePrefab: {fileID: 8418094924654087315, guid: 0847a78005bad624595bea7f827ebf25, type: 3}
   firePoint: {fileID: 2283015786276576013}

@@ -35,7 +35,6 @@ public class AttributeBar : MonoBehaviour
                 break;
 
             default:
-                slider.maxValue = 100f;
                 break;
         }
     }
@@ -60,6 +59,11 @@ public class AttributeBar : MonoBehaviour
     }
 
     public AttributeType GetAttributeType() => type;
+
+    public void Setup(float maxValue)
+    {
+        slider.maxValue = maxValue;
+    }
 
     public void SetValue(float value)
     {

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
@@ -31,6 +32,7 @@ public abstract class Tank : MonoBehaviour
 
     [Header("Tank Stat")]
     [SerializeField] protected TankStat stat;
+    [SerializeField] protected ReactiveProperty<float> curHealth = new ReactiveProperty<float>(100);
     [SerializeField] protected float rotationSpeed = 0.2f;
     protected float isRotating = 0f;
     protected Direction lastDirection = Direction.Up;
@@ -47,10 +49,14 @@ public abstract class Tank : MonoBehaviour
     abstract protected void SetupTank();
     abstract protected void BeingHit(ProjectileData data);
 
+    virtual protected void Awake()
+    {
+        SetupTank();
+    }
 
     virtual protected void Start()
     {
-        SetupTank();
+        
     }
 
     virtual protected void Update()
@@ -133,5 +139,15 @@ public abstract class Tank : MonoBehaviour
         else
             return Physics2D.OverlapBox(wallDetection.position, new Vector2(2.2f, 0.5f), 0, wallLayer);
 
+    }
+
+    public ReactiveProperty<float> SubscribeCurrentHealth()
+    {
+        return curHealth;
+    }
+
+    public TankStat GetTankStat()
+    {
+        return stat;
     }
 }

@@ -64,8 +64,6 @@ public class EnemyTank : Tank
         base.Start();
 
         playerBase = GameObject.FindGameObjectWithTag("playerBase").transform;
-        //Debug
-        //Spawn(null);
     }
 
     protected override void Update()
@@ -89,6 +87,7 @@ public class EnemyTank : Tank
 
     public void Spawn(Subject<EnemyTank> onDestroy)
     {
+        this.onDestroy = onDestroy;
         isSpawned = true;
         DoRotation(Direction.Down);
     }
