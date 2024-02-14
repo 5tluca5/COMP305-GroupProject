@@ -221,25 +221,25 @@ public class EnemyTank : Tank
         }
         else if (!IsfacingObstacle() && !IsfacingWall())
         {
-            //changeDirectionTimer += Time.deltaTime * 0.3f;
+            changeDirectionTimer += Time.deltaTime * 0.2f;
             var curRotation = transform.localEulerAngles.z;
 
             switch (lastDirection)
             {
                 case Direction.Left:
-                    if (curRotation == 90)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
+                    if (Mathf.Approximately(curRotation, 90f))
+                            transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
                 case Direction.Right:
-                    if (curRotation == 270)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
+                    if (Mathf.Approximately(curRotation, 270f))
+                            transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
                 case Direction.Up:
-                    if ((curRotation <= 0.001 && curRotation >= -0.001))
+                    if ((curRotation <= 0.001f && curRotation >= -0.001f))
                         transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
                 case Direction.Down:
-                    if (curRotation == 180)
+                    if (Mathf.Approximately(curRotation, 180f))
                         transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
             }
