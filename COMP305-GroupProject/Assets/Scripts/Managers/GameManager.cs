@@ -74,8 +74,8 @@ public class GameManager : MonoBehaviour
     {
         levelDataDict.Clear();
 
-        //levelDataDict.Add(1, new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
-        levelDataDict.Add(1, new List<int> { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
+        levelDataDict.Add(1, new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
+        //levelDataDict.Add(1, new List<int> { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
         levelDataDict.Add(2, new List<int> { 1, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
         levelDataDict.Add(3, new List<int> { 0, 1, 0, 0, 1, 0, 0, 1, 0, 1 });
         levelDataDict.Add(4, new List<int> { 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 });
