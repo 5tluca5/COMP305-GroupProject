@@ -620,6 +620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1729945418241297339}
+  - component: {fileID: 6641432117190100542}
   m_Layer: 5
   m_Name: GameSceneUI
   m_TagString: Untagged
@@ -648,6 +649,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6641432117190100542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203125722478355154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2f6613ec682da4eabb947423859651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealthBar: {fileID: 6765859979216155127}
+  playerHealthText: {fileID: 4660715787670574771}
 --- !u!1001 &1499406115488555478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -670,7 +685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3849591697132507705, guid: 4a997f73c6c2d6e49b85baffb3648de9, type: 3}
       propertyPath: m_Value
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4138006206336137128, guid: 4a997f73c6c2d6e49b85baffb3648de9, type: 3}
       propertyPath: m_Pivot.x
@@ -774,3 +789,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4138006206336137128, guid: 4a997f73c6c2d6e49b85baffb3648de9, type: 3}
   m_PrefabInstance: {fileID: 1499406115488555478}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6765859979216155127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5272549849408704545, guid: 4a997f73c6c2d6e49b85baffb3648de9, type: 3}
+  m_PrefabInstance: {fileID: 1499406115488555478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af1d30898d802d4dba37e7cd8488afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -123,6 +123,7 @@ public class EnemySpawnerManager : MonoBehaviour
         var tank = Instantiate(_enemyTankPrefabs[Random.Range(0, _enemyTankPrefabs.Length)], spawnSpot.position, Quaternion.identity).GetComponent<EnemyTank>();
         tank.Spawn(onDestroyTank);
         _existingEnemyTanks.Add(tank);
+        currentEnemyIndex++;
     }
 
     //spawning mini boss every 4th and 5th level
@@ -131,6 +132,7 @@ public class EnemySpawnerManager : MonoBehaviour
         var tank = Instantiate(_eliteTankPrefabs[Random.Range(0, _eliteTankPrefabs.Length)], spawnSpot.position, Quaternion.identity).GetComponent<EnemyTank>();
         tank.Spawn(onDestroyTank);
         _existingEnemyTanks.Add(tank);
+        currentEnemyIndex++;
     }
 
 
@@ -140,6 +142,7 @@ public class EnemySpawnerManager : MonoBehaviour
         var tank = Instantiate(_bossTankPrefabs[Random.Range(0, _bossTankPrefabs.Length)], spawnSpot.position, Quaternion.identity).GetComponent<EnemyTank>();
         tank.Spawn(onDestroyTank);
         _existingEnemyTanks.Add(tank);
+        currentEnemyIndex++;
     }
 
     IEnumerator CreateSpawnEffect(Transform spawnPoint, UnityAction spawnAction)

@@ -42,8 +42,10 @@ public class PlayerController : PlayerTank
         var up = Input.GetKey(upKey);
         var down = Input.GetKey(downKey);
 
-        var horizontal = Mathf.Abs(Input.GetAxis("Horizontal"));
-        var vertical = Mathf.Abs(Input.GetAxis("Vertical"));
+        var horizontal = Mathf.Abs(Input.GetAxis("Horizontal"));  //Temp disable
+        var vertical = Mathf.Abs(Input.GetAxis("Vertical"));  //Temp disable
+        //var horizontal = 1;
+        //var vertical = 1;
 
         if (!left && !right && !up && !down)
         {

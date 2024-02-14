@@ -12,6 +12,7 @@ public class PlayerTank : Tank
         stat = GameManager.Instance.GetCurrentTankStat();
         tankParts = GameManager.Instance.GetCurrentTankParts();
 
+        curHealth.Value = stat.health;
         fireRate = 1 / (stat.fireRate * 0.1f);
 
         trackLImg.sprite = trackRImg.sprite = AtlasLoader.Instance.GetSprite(tankParts[TankParts.Track].spriteName);
@@ -25,10 +26,10 @@ public class PlayerTank : Tank
     {
         if (!data.isPlayer)
         {
-            stat.health -= data.damage;
+            curHealth.Value -= data.damage;
         }
 
-        if (stat.health <= 0f)
+        if (curHealth.Value <= 0f)
         {
             // GG
             Debug.Log("Gameover");
