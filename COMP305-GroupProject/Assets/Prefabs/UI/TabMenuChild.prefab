@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 868d70f95351b294988a8f63806d7609, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 1
@@ -215,6 +215,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tabIndex: 0
+  tabMenu: {fileID: 0}
+  buttonImage: {fileID: 0}
+  onClickButton: {fileID: 0}
+  buttonText: {fileID: 0}
   onNormalColor: {r: 1, g: 1, b: 1, a: 1}
   onSelectedColor: {r: 1, g: 0.9764706, b: 0, a: 1}
   onNormalSprite: {fileID: 0}
