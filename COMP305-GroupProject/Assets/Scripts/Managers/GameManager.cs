@@ -25,19 +25,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Atlas Count: " + AtlasLoader.Instance.AtlasCount());
 
         TankStatManager.Instance.Init();
-        _enemySpawnerManager = EnemySpawnerManager.Instance;
+
         LoadData();
     }
 
-    Dictionary<TankParts, TankPart> currentTankParts = new Dictionary<TankParts, TankPart>();
-
-    private EnemySpawnerManager _enemySpawnerManager;
+    Dictionary<TankParts, TankPart> currentTankParts = new Dictionary<TankParts, TankPart>(); 
 
     private void Start()
     {
-        var testData = new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-        _enemySpawnerManager.Setup(testData.Select(x => (EnemyTankType)x).ToList(), 3);
-        _enemySpawnerManager.SetEnabled(true);
+
     }
 
     void LoadData()
@@ -64,41 +60,5 @@ public class GameManager : MonoBehaviour
         {
             currentTankParts[tp.parts] = tp;
         }
-    }
-
-    public TankStat GetCurrentTankStat()
-    {
-        return TankStatManager.Instance.CalculateTankStat(currentTankParts.Values.ToList());
-    }
-
-    #region - Enemy Spawn
-
-    //public void SpawnEnemyTank() 
-    //{
-    //    _enemySpawnerManager.SpawnEnemyTank();
-    //}
-    //public void SpawnMiniBossTank()
-    //{
-    //    _enemySpawnerManager.SpawnMiniBossTank();
-    //}
-    //public void SpawnBossTank()
-    //{
-    //    _enemySpawnerManager.SpawnBossTank();
-    //}
-    #endregion
-
-    public TankStat GetEnemyTankStat(EnemyTankType type)
-    {
-        switch(type)
-        {
-            case EnemyTankType.Normal:
-                return new TankStat(30, 3, 3, 30);
-            case EnemyTankType.Elite:
-                return new TankStat(90, 5, 4, 100);
-            case EnemyTankType.Boss:
-                return new TankStat(150, 10, 2, 300);
-        }
-
-        return new TankStat(1, 5, 10, 3);
     }
 }

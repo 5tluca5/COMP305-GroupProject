@@ -3,20 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - bullet
-  - playerBase
-  - enemy
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Block
-  - UnBreakableBlock
-  - Bullet
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -41,12 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 4112526881
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Foreground
-    uniqueID: 903791483
     locked: 0

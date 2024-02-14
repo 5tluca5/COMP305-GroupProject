@@ -75,7 +75,7 @@ public class CompositionPage : CommonPage
     {
         var part = availablePartList[Mathf.Abs(--currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
-        //RefreshAttribute();
+        RefreshAttribute();
 
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
@@ -96,14 +96,14 @@ public class CompositionPage : CommonPage
         }
 
         // Debug
-        currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
+        //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     public void OnClickRightArrowBtn()
     {
         var part = availablePartList[Mathf.Abs(++currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
-        //RefreshAttribute();
+        RefreshAttribute();
 
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
@@ -124,7 +124,7 @@ public class CompositionPage : CommonPage
         }
 
         // Debug
-        currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
+        //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     IEnumerator ChangeTankColor(Color32 color)
