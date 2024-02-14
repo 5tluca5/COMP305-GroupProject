@@ -7,17 +7,12 @@ using Unity.VisualScripting;
 
 public class TankStatManager : MonoBehaviour
 {
-    static TankStatManager instance;
+    static TankStatManager instance = null;
 
     public static TankStatManager Instance
     {
         get
         {
-            if(instance == null)
-            {
-                instance = new TankStatManager();
-            }
-
             return instance;
         }
     }
@@ -39,6 +34,7 @@ public class TankStatManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+        Init();
     }
 
     public void Init()

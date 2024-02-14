@@ -1022,6 +1022,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankStatManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6472887804382195308, guid: 839899f195e37494cb3ce6b02c76ec8e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1176,6 +1180,6 @@ SceneRoots:
   - {fileID: 7332506716204829283}
   - {fileID: 1392060321}
   - {fileID: 761096666}
-  - {fileID: 1293400187}
   - {fileID: 2105461147}
+  - {fileID: 1293400187}
   - {fileID: 1546180457}

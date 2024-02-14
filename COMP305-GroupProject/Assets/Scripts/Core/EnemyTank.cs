@@ -36,7 +36,7 @@ public class EnemyTank : Tank
                 changeDirectionTime = 1f;
                 break;
             case EnemyTankType.Elite:
-                changeDirectionTime = 1f;
+                changeDirectionTime = 0.5f;
                 break;
             case EnemyTankType.Boss:
                 changeDirectionTime = 0.2f;
@@ -69,6 +69,7 @@ public class EnemyTank : Tank
     protected override void Update()
     {
         if (!isSpawned) return;
+        if (GameManager.Instance.IsGameOver.Value || GameManager.Instance.IsGameClear.Value) return;
 
         base.Update();
 
@@ -170,45 +171,76 @@ public class EnemyTank : Tank
                 Fire();
             }
         }
-
-        changeDirectionTimer += Time.deltaTime;
-
-        if (IsfacingWall() || changeDirectionTimer >= changeDirectionTime)
+        if (IsfacingWall())
         {
-            if(IsfacingWall())
-            {
-                lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.Down);
-            }
-            else
-            {
-                lastDirection = Random.Range(0, 10) <= 3 ? Direction.Down : (Direction)Random.Range((int)Direction.Left, (int)Direction.Down);
-            }
+            changeDirectionTimer += Time.deltaTime * 3f;
+        }
+        else if (IsfacingObstacle())
+        {
+            //changeDirectionTimer += Time.deltaTime * 0.05f;
+        }
 
+        if (changeDirectionTimer >= changeDirectionTime)
+        {
+            //if (IsfacingWall())
+            //{
+            //    lastDirection = (Direction)Random.Range((int)Direction.Left, (int)Direction.Down);
+            //}
+            //else
+            //{
+            //    if (Random.Range(0, 10) < 5)
+            //    {
+            //        if (playerBase.position.y + 5 < transform.position.y)
+            //        {
+            //            lastDirection = Direction.Down;
+            //        }
+            //        else
+            //        {
+            //            lastDirection = Direction.Up;
+            //        }
+            //    }
+            //    else if(playerBase.position.x - 5 > transform.position.x)
+            //    {
+            //        lastDirection = Direction.Right;
+            //    }
+            //    else if (playerBase.position.x + 5 < transform.position.x)
+            //    {
+            //        lastDirection = Direction.Left;
+            //    }
+
+            //    DoRotation(lastDirection);
+            Direction newDir;
+            do
+            {
+                newDir = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
+            } while (newDir == lastDirection);
+
+            lastDirection = newDir;
             DoRotation(lastDirection);
-
             changeDirectionTimer = 0;
         }
-        else if (!IsfacingObstacle())
+        else if (!IsfacingObstacle() && !IsfacingWall())
         {
+            //changeDirectionTimer += Time.deltaTime * 0.3f;
             var curRotation = transform.localEulerAngles.z;
 
             switch (lastDirection)
             {
                 case Direction.Left:
                     if (curRotation == 90)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
                 case Direction.Right:
                     if (curRotation == 270)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
                 case Direction.Up:
                     if ((curRotation <= 0.001 && curRotation >= -0.001))
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
                 case Direction.Down:
                     if (curRotation == 180)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
                     break;
             }
         }

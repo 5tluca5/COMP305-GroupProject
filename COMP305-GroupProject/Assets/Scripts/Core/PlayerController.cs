@@ -9,6 +9,8 @@ using UnityEditor;
 
 public class PlayerController : PlayerTank
 {
+    [SerializeField] Transform spawnPoint;
+
     [Header("Controll Keys")]
     [SerializeField] KeyCode leftKey = KeyCode.LeftArrow;
     [SerializeField] KeyCode rightKey = KeyCode.RightArrow;
@@ -23,7 +25,8 @@ public class PlayerController : PlayerTank
 
     override protected void Update()
     {
-        
+        if (GameManager.Instance.IsGameOver.Value || GameManager.Instance.IsGameClear.Value) return;
+
         base.Update();
 
         HandleMovement();
@@ -196,5 +199,12 @@ public class PlayerController : PlayerTank
         inputs.ToList().ForEach(x => log += x.ToString());
 
         Debug.Log(log);
+    }
+
+    public void Reset()
+    {
+        curHealth.Value = stat.health;
+        transform.position = spawnPoint.position;
+        transform.rotation = Quaternion.identity;
     }
 }

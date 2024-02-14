@@ -31,7 +31,6 @@ public class EnemySpawnerManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        DontDestroyOnLoad(gameObject);
 
         GameManager.Instance.SetEnemySpawnerManager(instance);
     }

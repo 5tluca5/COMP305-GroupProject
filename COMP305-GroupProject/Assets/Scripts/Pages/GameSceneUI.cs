@@ -53,4 +53,10 @@ public class GameSceneUI : MonoBehaviour
         }).AddTo(this);
     }
 
+    public void OnClickBackMainScene()
+    {
+        GameManager.Instance.SetGameClear(false);
+        GameManager.Instance.SetGameOver(false);
+        GameManager.Instance.ResetGameLevel();
+    }
 }

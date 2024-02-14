@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if(GameManager.Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -36,13 +42,13 @@ public class GameManager : MonoBehaviour
 
         IsGameClear.Subscribe(x =>
         {
-            if(_enemySpawnerManager)
+            if(x && _enemySpawnerManager)
                 _enemySpawnerManager.SetEnabled(false);
         }).AddTo(this);
 
         IsGameOver.Subscribe(x =>
         {
-            if(_enemySpawnerManager)
+            if(x && _enemySpawnerManager)
                 _enemySpawnerManager.SetEnabled(false);
         }).AddTo(this);
     }
@@ -68,7 +74,8 @@ public class GameManager : MonoBehaviour
     {
         levelDataDict.Clear();
 
-        levelDataDict.Add(1, new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
+        //levelDataDict.Add(1, new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
+        levelDataDict.Add(1, new List<int> { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
         levelDataDict.Add(2, new List<int> { 1, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
         levelDataDict.Add(3, new List<int> { 0, 1, 0, 0, 1, 0, 0, 1, 0, 1 });
         levelDataDict.Add(4, new List<int> { 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 });
@@ -157,9 +164,24 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
+        var player = GameObject.FindGameObjectWithTag("Player") as GameObject;
+
+        if(player != null)
+        {
+            player.GetComponent<PlayerController>().Reset();
+        }
+
         CurrentGameLevel.Value++;
 
         _enemySpawnerManager.Setup(levelDataDict[CurrentGameLevel.Value].Select(x => (EnemyTankType)x).ToList(), 3);
         _enemySpawnerManager.SetEnabled(true);
+
+        IsGameOver.Value = false;
+        IsGameClear.Value = false;
+    }
+
+    public void ResetGameLevel()
+    {
+        CurrentGameLevel.Value = 1;
     }
 }
