@@ -7251,7 +7251,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1277293624}
-  - {fileID: 304532503}
   - {fileID: 1742023638}
   - {fileID: 1317177631}
   m_Father: {fileID: 0}
@@ -16418,8 +16417,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1671620062}
+  m_Children: []
   m_Father: {fileID: 1742023638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -18051,7 +18049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8981808061425183350, guid: 8bf16cec78bd5c64d9c959ceffba010c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: LevelPrototypeScene
+      value: MainScreen
       objectReference: {fileID: 0}
     - target: {fileID: 8981808061425183350, guid: 8bf16cec78bd5c64d9c959ceffba010c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -18605,6 +18603,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6641432117190100542, guid: 1f3b577ae7a1f704eb7bd1f96dc62ae2, type: 3}
+      propertyPath: gameOverPage
+      value: 
+      objectReference: {fileID: 1742023637}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24539,10 +24541,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1606551365}
-  - {fileID: 1615535052}
   - {fileID: 1203815364}
-  - {fileID: 2009033611}
   m_Father: {fileID: 367404327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

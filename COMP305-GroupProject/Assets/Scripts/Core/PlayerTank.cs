@@ -29,11 +29,13 @@ public class PlayerTank : Tank
             curHealth.Value -= data.damage;
         }
 
+        curHealth.Value = Mathf.Max(0, curHealth.Value);
+
         if (curHealth.Value <= 0f)
         {
             // GG
             Debug.Log("Gameover");
-            Time.timeScale = 0f;
+            GameManager.Instance.SetGameOver(true);
         }
     }
 }
