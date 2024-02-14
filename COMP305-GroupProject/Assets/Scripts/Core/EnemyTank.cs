@@ -125,11 +125,11 @@ public class EnemyTank : Tank
 
         if (changeDirectionTimer >= changeDirectionTime)
         {
-            Direction newDir = lastDirection;
+            Direction newDir;
             do
             {
                 newDir = (Direction)Random.Range((int)Direction.Left, (int)Direction.None);
-            } while (newDir != lastDirection);
+            } while (newDir == lastDirection);
 
             lastDirection = newDir;
             DoRotation(lastDirection);
