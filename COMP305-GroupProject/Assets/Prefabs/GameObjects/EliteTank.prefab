@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 2266043844814904831}
   - component: {fileID: 81123789365239751}
   - component: {fileID: 2079840100489014540}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EliteTank
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -611,7 +611,7 @@ MonoBehaviour:
   gunConnectorImg: {fileID: 0}
   gunImg: {fileID: 0}
   rotationSpeed: 0.2
-  projectilePrefab: {fileID: 8418094924654087315, guid: 70e4225073b81b34c9cd16c1f31d93c7, type: 3}
+  projectilePrefab: {fileID: 8418094924654087315, guid: 007145f6ea74ac64da654cdfe0d0c8e8, type: 3}
   firePoint: {fileID: 6238516011052996109}
   type: 1
 --- !u!1 &5426658026897714928

@@ -97,7 +97,7 @@ public class EnemyTank : Tank
     {
         if (fireTimer > fireRate)
         {
-            if (Random.Range(0, 3) % 2 == 1)
+            if (Random.Range(0, 3) % 2 == 1 || IsfacingObstacle())
             {
                 Fire();
             }
@@ -166,7 +166,7 @@ public class EnemyTank : Tank
     {
         if (fireTimer > fireRate)
         {
-            if (Random.Range(0, 3) < 2)
+            if (Random.Range(0, 3) < 2 || IsfacingObstacle())
             {
                 Fire();
             }
@@ -197,19 +197,19 @@ public class EnemyTank : Tank
             {
                 case Direction.Left:
                     if (curRotation == 90)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
                     break;
                 case Direction.Right:
                     if (curRotation == 270)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
                     break;
                 case Direction.Up:
                     if ((curRotation <= 0.001 && curRotation >= -0.001))
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
                     break;
                 case Direction.Down:
                     if (curRotation == 180)
-                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * 1));
+                        transform.Translate(new Vector2(0, stat.movementSpeed * Time.deltaTime * Constant.TANK_WEIGHT));
                     break;
             }
         }

@@ -138,7 +138,7 @@ public class PlayerController : PlayerTank
 
         var curRotation = transform.localEulerAngles.z;
 
-        blocked = IsfacingObstacle();
+        blocked = IsfacingObstacle() || IsFacingEnemy();
 
         if (!blocked)
         {
@@ -174,6 +174,16 @@ public class PlayerController : PlayerTank
                 Fire(true);
             }
         }
+    }
+
+    bool IsFacingEnemy()
+    {
+        var curRotation = transform.localEulerAngles.z;
+
+        if (curRotation == 90 || curRotation == 270)
+            return Physics2D.OverlapBox(wallDetection.position, new Vector2(0.5f, 2.2f), 0, LayerMask.NameToLayer("Tank"));
+        else
+            return Physics2D.OverlapBox(wallDetection.position, new Vector2(2.2f, 0.5f), 0, LayerMask.NameToLayer("Tank"));
     }
 
     void PrintDebug()

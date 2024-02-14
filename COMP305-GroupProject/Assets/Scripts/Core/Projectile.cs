@@ -67,13 +67,19 @@ public class Projectile : MonoBehaviour
         Debug.Log("Perform operation");
     }
 
+    bool hit = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (hit) return;
+
         collision.gameObject.SendMessage("BeingHit", new ProjectileData(damage, isPlayer), SendMessageOptions.DontRequireReceiver);
 
         var effect = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         SoundManager.Instance.PlaySound("Explosion");
         effect.transform.localScale *= transform.localScale.x;
         Destroy(gameObject);
+
+        hit = true;
     }
 }

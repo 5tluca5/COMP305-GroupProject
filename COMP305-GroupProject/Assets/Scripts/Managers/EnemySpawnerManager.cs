@@ -54,7 +54,7 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] int maxExistingEnemyCount = 3;
     [SerializeField] List<EnemyTankType> enemyList = new List<EnemyTankType>();
     [SerializeField] int currentEnemyIndex = 0;
-    [SerializeField] float spawnInterval = 2f;
+    [SerializeField] float spawnInterval = 5f;
     [SerializeField] float spawnTimer = 0f;
 
     private void Start()

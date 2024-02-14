@@ -815,7 +815,7 @@ Transform:
   m_GameObject: {fileID: 37038452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 0}
+  m_LocalPosition: {x: -14, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9053,7 +9053,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -17224,7 +17224,7 @@ GameObject:
   - component: {fileID: 1242894352}
   - component: {fileID: 1242894351}
   - component: {fileID: 1242894353}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Tilemap_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20318,6 +20318,11 @@ MonoBehaviour:
   - {fileID: 5830641911561354516, guid: 65235c8e3c9bd974481ef9e96a661e21, type: 3}
   - {fileID: 10455276335100606, guid: 2317a8c3bc30bf744baf482b0c2d76f4, type: 3}
   - {fileID: 5867355338401054516, guid: b114953c5c913db499614f92e5a76e68, type: 3}
+--- !u!224 &1386094019 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1729945418241297339, guid: 1f3b577ae7a1f704eb7bd1f96dc62ae2, type: 3}
+  m_PrefabInstance: {fileID: 2626641100351519737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388046628
 GameObject:
   m_ObjectHideFlags: 0
@@ -30207,12 +30212,20 @@ PrefabInstance:
       value: PlayerTank
       objectReference: {fileID: 0}
     - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: curDireciton
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: wallLayer.m_Bits
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: obstacleLayer.m_Bits
       value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605580501423089210, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30418,11 +30431,11 @@ PrefabInstance:
     - target: {fileID: 1487633696167928437, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
       propertyPath: _eliteTankPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 4596526497815271157, guid: 99bc2170747b8ec48a30b05294b2691d, type: 3}
+      objectReference: {fileID: 4596526497815271157, guid: 8bad813c774f10840a32f958fdb169d4, type: 3}
     - target: {fileID: 1487633696167928437, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
       propertyPath: _enemyTankPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1767042387875690151, guid: 28bc6bb0af3dc8a4bb3bcb7617e80318, type: 3}
+      objectReference: {fileID: 1767042387875690151, guid: 79b82a6a791d1d64193c6961c0b1c9ae, type: 3}
     - target: {fileID: 5746990411612557750, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
       propertyPath: m_Name
       value: EnemySpawnerManager
@@ -30760,7 +30773,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 367404327}
   - {fileID: 15109810}
   - {fileID: 6722595142388006463}
   - {fileID: 7449255695794011606}
