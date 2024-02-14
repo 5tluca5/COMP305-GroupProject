@@ -32,6 +32,8 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        GameManager.Instance.SetEnemySpawnerManager(instance);
     }
     #endregion
 

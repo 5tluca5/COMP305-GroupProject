@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Atlas Count: " + AtlasLoader.Instance.AtlasCount());
 
         TankStatManager.Instance.Init();
-        _enemySpawnerManager = EnemySpawnerManager.Instance;
         LoadData();
     }
 
@@ -33,11 +32,19 @@ public class GameManager : MonoBehaviour
 
     private EnemySpawnerManager _enemySpawnerManager;
 
-    private void Start()
+    public void SetEnemySpawnerManager(EnemySpawnerManager esm)
     {
-        var testData = new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+        _enemySpawnerManager = esm;
+        var testData = new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
         _enemySpawnerManager.Setup(testData.Select(x => (EnemyTankType)x).ToList(), 3);
         _enemySpawnerManager.SetEnabled(true);
+    }
+
+    private void Start()
+    {
+        //var testData = new List<int> { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+        //_enemySpawnerManager.Setup(testData.Select(x => (EnemyTankType)x).ToList(), 3);
+        //_enemySpawnerManager.SetEnabled(true);
     }
 
     void LoadData()
