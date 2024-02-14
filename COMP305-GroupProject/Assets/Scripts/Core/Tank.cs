@@ -61,6 +61,8 @@ public abstract class Tank : MonoBehaviour
 
     virtual protected void Update()
     {
+        if (GameManager.Instance.IsGameOver.Value || GameManager.Instance.IsGameClear.Value) return;
+
         if(isRotating > 0f)
         {
             isRotating -= Time.deltaTime;

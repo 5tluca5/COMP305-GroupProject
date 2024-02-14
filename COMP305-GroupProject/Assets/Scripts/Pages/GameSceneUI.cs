@@ -11,9 +11,16 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] AttributeBar playerHealthBar;
     [SerializeField] TMP_Text playerHealthText;
 
+    [Header("Level")]
+    [SerializeField] TMP_Text curLevelText;
+
+    [Header("Other UI")]
+    [SerializeField] GameObject gameOverPage;
+    [SerializeField] GameObject gameClearPage;
+
     PlayerController player;
     float playerMaxHp = 150f;
-    // Start is called before the first frame update
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -26,6 +33,23 @@ public class GameSceneUI : MonoBehaviour
             playerHealthBar.SetValue(hp);
 
             playerHealthText.text = hp.ToString() + " / " + playerMaxHp.ToString();
+        }).AddTo(this);
+
+        GameManager.Instance.IsGameOver.Subscribe(x =>
+        {
+            if (x)
+                gameOverPage.SetActive(true);
+        }).AddTo(this);
+
+        GameManager.Instance.IsGameClear.Subscribe(x =>
+        {
+            if (x)
+                gameClearPage.SetActive(true);
+        }).AddTo(this);
+
+        GameManager.Instance.CurrentGameLevel.Subscribe(x =>
+        {
+            curLevelText.text = x.ToString();
         }).AddTo(this);
     }
 

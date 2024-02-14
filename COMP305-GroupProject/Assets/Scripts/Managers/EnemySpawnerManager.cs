@@ -67,12 +67,18 @@ public class EnemySpawnerManager : MonoBehaviour
             {
                 _existingEnemyTanks.Remove(tank);
             }
+
+            if(currentEnemyIndex - _existingEnemyTanks.Count >= enemyList.Count)
+            {
+                GameManager.Instance.SetGameClear(true);
+            }
         }).AddTo(this);
     }
     public void SetEnabled(bool set) => isEnabled = set;
 
     public void Setup(List<EnemyTankType> enemyList, int maxExistingEnemyCount = 3)
     {
+        _existingEnemyTanks.ForEach(tank => { Destroy(tank.gameObject); });
         _existingEnemyTanks.Clear();
         this.enemyList = enemyList;
         this.maxExistingEnemyCount = maxExistingEnemyCount;

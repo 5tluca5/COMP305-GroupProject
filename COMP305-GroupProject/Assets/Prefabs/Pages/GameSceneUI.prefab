@@ -663,6 +663,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthBar: {fileID: 6765859979216155127}
   playerHealthText: {fileID: 4660715787670574771}
+  curLevelText: {fileID: 2793197866182195211}
+  gameOverPage: {fileID: 0}
+  gameClearPage: {fileID: 0}
 --- !u!1001 &1499406115488555478
 PrefabInstance:
   m_ObjectHideFlags: 0
