@@ -6,6 +6,7 @@ using DG.Tweening;
 using UniRx;
 using Unity.VisualScripting;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CompositionPage : CommonPage
 {
@@ -58,8 +59,17 @@ public class CompositionPage : CommonPage
         }).AddTo(this);
 
         RefreshAttribute();
+        attribute.SetStat(currentStat.Value);
 
         onCloseCallback += OnClose;
+    }
+
+    private void OnEnable()
+    {
+        selectingTankParts = GameManager.Instance.GetCurrentTankParts();
+        RefreshAttribute();
+        attribute.SetStat(currentStat.Value);
+        
     }
 
     void LoadTank()
@@ -95,8 +105,10 @@ public class CompositionPage : CommonPage
                 StartCoroutine(ChangeTankPartHorizontally(true, currentTab, sprite));
         }
 
+        RefreshAttribute();
+
         // Debug
-        currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
+        //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     public void OnClickRightArrowBtn()
@@ -123,8 +135,10 @@ public class CompositionPage : CommonPage
                 StartCoroutine(ChangeTankPartHorizontally(false, currentTab, sprite));
         }
 
+        RefreshAttribute();
+
         // Debug
-        currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
+        //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     IEnumerator ChangeTankColor(Color32 color)
@@ -228,5 +242,12 @@ public class CompositionPage : CommonPage
     void RefreshAttribute()
     {
         currentStat.Value = TankStatManager.Instance.CalculateTankStat(selectingTankParts.Values.ToList());
+    }
+
+    public void OnClickGoButton()
+    {
+        GameManager.Instance.SetCurrentTankParts(selectingTankParts.Values.ToList());
+
+        SceneManager.LoadScene("LevelPrototypeScene");
     }
 }

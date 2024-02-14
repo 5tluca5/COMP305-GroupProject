@@ -14,6 +14,9 @@ public class Attribute : MonoBehaviour
 
     public void SetStat(TankStat stat)
     {
+        if(attributeBars.Count <= 0)
+            attributeBars = GetComponentsInChildren<AttributeBar>().ToList();
+
         foreach (var bar in attributeBars)
         {
             switch (bar.GetAttributeType())

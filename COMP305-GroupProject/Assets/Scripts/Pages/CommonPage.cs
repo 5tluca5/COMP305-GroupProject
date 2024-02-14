@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CommonPage : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class CommonPage : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        transform.DOLocalMoveX(0, 0);
+        //Destroy(gameObject);
     }
 }
