@@ -25,8 +25,10 @@ public class CompositionPage : CommonPage
 
     [Header("Attribute")]
     [SerializeField] Attribute attribute;
+
     [Header("Menu")]
     [SerializeField] TabMenu tabMenu;
+    [SerializeField] GameObject noExtraComponentText;
 
     // data
     TankParts currentTab = TankParts.Light;
@@ -51,6 +53,11 @@ public class CompositionPage : CommonPage
             currentTab = (TankParts)tab.GetTabIndex();
             availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
             currentPartIndex = availablePartList.IndexOf(selectingTankParts[currentTab]);
+
+            leftArrowBtn.GetComponent<Button>().interactable = availablePartList.Count > 1;
+            rightArrowBtn.GetComponent<Button>().interactable = availablePartList.Count > 1;
+            noExtraComponentText.SetActive(availablePartList.Count <= 1);
+
         }).AddTo(this);
 
         currentStat.Subscribe(stat =>
@@ -143,14 +150,14 @@ public class CompositionPage : CommonPage
 
     IEnumerator ChangeTankColor(Color32 color)
     {
-        SetArrowVisible(false);
+        //SetArrowVisible(false);
 
         //var c = new Color32(color.r, color.g, color.b, 255);
         lightImg.DOColor(color, 0.25f);
         //lightImg.color = c;
         yield return new WaitForSeconds(0f);
 
-        SetArrowVisible(true);
+        //SetArrowVisible(true);
     }
     IEnumerator ChangeTankPartHorizontally(bool isLeft, TankParts tankPart, Sprite s)
     {

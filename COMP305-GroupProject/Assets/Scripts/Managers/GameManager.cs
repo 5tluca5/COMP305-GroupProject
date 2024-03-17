@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public ReactiveProperty<bool> IsGameOver { get; private set; } = new ReactiveProperty<bool>(false);
     public ReactiveProperty<bool> IsGameClear { get; private set; } = new ReactiveProperty<bool>(false);
     public ReactiveProperty<int> CurrentGameLevel { get; private set; } = new ReactiveProperty<int>(1);
+    public ReactiveProperty<int> PlayerCoins { get; private set; } = new ReactiveProperty<int>();
+
     public static GameManager Instance
     {
         get
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
     Dictionary<TankParts, TankPart> currentTankParts = new Dictionary<TankParts, TankPart>();
+    HashSet<int> unlockedTankParts = new HashSet<int>();
 
     private EnemySpawnerManager _enemySpawnerManager;
     Dictionary<int, List<int>> levelDataDict = new Dictionary<int, List<int>>();
@@ -106,11 +109,26 @@ public class GameManager : MonoBehaviour
 
         var tsm = TankStatManager.Instance;
 
-        foreach(TankParts tp in Enum.GetValues(typeof(TankParts)))
+        foreach(var id in tsm.GetAllTankPartIds())
+        {
+            var isOwned = PlayerPrefs.GetInt(Constant.SAVE_KEY_UNLOCKED_TANK_PART + id.ToString(), 0);
+
+            if(isOwned == 1 || id >= 5000)
+            {
+                unlockedTankParts.Add(id);
+            }
+        }
+
+        foreach (TankParts tp in Enum.GetValues(typeof(TankParts)))
         {
             var tpId = PlayerPrefs.GetInt(Constant.SAVE_KEY_CURRENT_TANK_PART + tp.ToString(), 0);
-            currentTankParts.Add(tp, tsm.GetTankPartData(tp, tpId));
+            var tpd = tsm.GetTankPartData(tp, tpId);
+            currentTankParts.Add(tp, tpd);
+
+            unlockedTankParts.Add(tpd.id);
         }
+
+        
     }
 
     public Dictionary<TankParts, TankPart> GetCurrentTankParts()
@@ -184,4 +202,16 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameLevel.Value = 1;
     }
+
+    public List<int> GetUnlockedTankPartIds()
+    {
+        return unlockedTankParts.ToList();
+    }
+
+    public void EnemyDropCoin(int amount)
+    {
+
+    }
+
+
 }

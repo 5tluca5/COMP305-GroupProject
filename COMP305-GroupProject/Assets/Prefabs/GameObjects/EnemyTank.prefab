@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 200
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -111,6 +111,8 @@ MonoBehaviour:
   towerImg: {fileID: 0}
   gunConnectorImg: {fileID: 0}
   gunImg: {fileID: 0}
+  curHealth:
+    value: 100
   rotationSpeed: 0.2
   projectilePrefab: {fileID: 8418094924654087315, guid: 007145f6ea74ac64da654cdfe0d0c8e8, type: 3}
   firePoint: {fileID: 3261047039848302948}

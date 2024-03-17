@@ -55,8 +55,29 @@ public class EnemyTank : Tank
         {
             //Do explosion?
 
+            DropCoin();
             Destroy(gameObject);
         }
+    }
+
+    private void DropCoin()
+    {
+        int amount;
+
+        switch(type)
+        {
+            case EnemyTankType.Normal:
+                amount = Random.Range(1, 5);
+                break;
+            case EnemyTankType.Elite:
+                amount = Random.Range(10, 20);
+                break;
+            case EnemyTankType.Boss:
+                amount = Random.Range(50, 70);
+                break;
+        }
+
+        Game
     }
 
     protected override void Start()
@@ -171,6 +192,8 @@ public class EnemyTank : Tank
                 Fire();
             }
         }
+
+
         if (IsfacingWall())
         {
             changeDirectionTimer += Time.deltaTime * 3f;

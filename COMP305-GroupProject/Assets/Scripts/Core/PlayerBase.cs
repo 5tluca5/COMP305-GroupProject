@@ -6,8 +6,9 @@ public class PlayerBase : MonoBehaviour
 {
     void BeingHit(ProjectileData data)
     {
-        if (!data.isPlayer)
+        //if (!data.isPlayer)
         {
+            Destroy(gameObject);
             GameManager.Instance.SetGameOver(true);
         }
     }

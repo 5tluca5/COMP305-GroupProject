@@ -16622,7 +16622,7 @@ GameObject:
   - component: {fileID: 1242894352}
   - component: {fileID: 1242894351}
   - component: {fileID: 1242894353}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Tilemap_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

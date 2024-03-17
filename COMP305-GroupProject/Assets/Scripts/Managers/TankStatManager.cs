@@ -177,7 +177,7 @@ public class TankStatManager : MonoBehaviour
             foreach (var part in parts)
             {
                 var id = globalId + j;
-                var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed, part.health), part.partName, tankPart == "Gun" ? part.assoPartName : "");
+                var tp = new TankPart(id, j, type, new TankStat(part.damage, part.fireRate, part.movementSpeed, part.health), part.price, part.partName, tankPart == "Gun" ? part.assoPartName : "");
                 tempDictPart.Add(j, tp);
                 dictById.Add(id, tp);
                 j++;
@@ -189,7 +189,8 @@ public class TankStatManager : MonoBehaviour
     public List<TankPart> GetObtainedTankPart(TankParts parts)
     {
         // Do logic here..
-        return dictByTankParts[parts].Values.ToList();
+        var optainedPart = GameManager.Instance.GetUnlockedTankPartIds();
+        return dictByTankParts[parts].Values.Where(x => optainedPart.Contains(x.id)).ToList();
     }
 
     public TankPart GetTankPartData(TankParts parts, int id)
@@ -203,5 +204,10 @@ public class TankStatManager : MonoBehaviour
     public Sprite GetTankPartImage(TankParts parts, int id)
     {
         return AtlasLoader.Instance.GetSprite(GetTankPartData(parts, id).spriteName);
+    }
+
+    public List<int> GetAllTankPartIds()
+    {
+        return dictById.Keys.ToList();
     }
 }

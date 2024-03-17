@@ -29,7 +29,7 @@ public struct TankStat
     [Range(1, 50)] public float fireRate;
     [Range(1, 15)] public float movementSpeed;
     [Range(1, 50)] public float health;
-
+    
     public TankStat(float dmg, float fr, float ms, float hp)
     {
         this.damage = dmg;
@@ -53,7 +53,7 @@ public class TankPart
     public string spriteName;
     public string associateSpriteName;  // For the guns, need to specify which gun connector its using
     public Color32 color; // for light color
-
+    public int cost;
     // Extra abilites
     // ...
 
@@ -65,12 +65,13 @@ public class TankPart
         this.parts = parts;
     }
 
-    public TankPart(int id, int subId, TankParts parts, TankStat stat, string spriteName, string assoSpriteName = "")
+    public TankPart(int id, int subId, TankParts parts, TankStat stat, int cost, string spriteName, string assoSpriteName = "")
     {
         this.id = id;
         this.subId = subId;
         this.parts = parts;
         this.stat = stat;
+        this.cost = cost;
         this.spriteName = spriteName;
         this.associateSpriteName = assoSpriteName;
     }

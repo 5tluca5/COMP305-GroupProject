@@ -5,20 +5,21 @@ using UnityEngine;
 public class BreakableBlock : MonoBehaviour
 {
     [SerializeField]
-    private int _hp = 1;
+    private float _hp = 100f;
 
     public void BeingHit(ProjectileData data)
     {
         // do the logic here
 
-        //Unbreakable Block
-        if (gameObject.layer == 7)
+        //Unbreakable Block only break by enemy
+        if (data.isPlayer)
         {
             return;
         }
 
-        _hp--;
-        if (_hp == 0)
+        _hp -= data.damage;
+
+        if (_hp <= 0)
         {
             Destroy(this.gameObject);
         }

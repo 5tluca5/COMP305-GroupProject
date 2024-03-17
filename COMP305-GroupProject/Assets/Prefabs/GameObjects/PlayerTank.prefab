@@ -303,7 +303,7 @@ MonoBehaviour:
     m_Bits: 64
   wallLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   wallDetection: {fileID: 5605580501423089210}
   lightImg: {fileID: 1786972431096049216}
   trackLImg: {fileID: 6543306829243763990}
@@ -317,6 +317,7 @@ MonoBehaviour:
   rotationSpeed: 0.2
   projectilePrefab: {fileID: 8418094924654087315, guid: 0847a78005bad624595bea7f827ebf25, type: 3}
   firePoint: {fileID: 2283015786276576013}
+  spawnPoint: {fileID: 0}
   leftKey: 276
   rightKey: 275
   upKey: 273

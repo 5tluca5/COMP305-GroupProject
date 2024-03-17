@@ -11,6 +11,9 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] AttributeBar playerHealthBar;
     [SerializeField] TMP_Text playerHealthText;
 
+    [Header("Coin")]
+    [SerializeField] TMP_Text curCoinText;
+
     [Header("Level")]
     [SerializeField] TMP_Text curLevelText;
 
@@ -45,6 +48,11 @@ public class GameSceneUI : MonoBehaviour
         {
             if (x)
                 gameClearPage.SetActive(true);
+        }).AddTo(this);
+
+        GameManager.Instance.PlayerCoins.Subscribe(x =>
+        {
+            curCoinText.text = x.ToString();
         }).AddTo(this);
 
         GameManager.Instance.CurrentGameLevel.Subscribe(x =>
