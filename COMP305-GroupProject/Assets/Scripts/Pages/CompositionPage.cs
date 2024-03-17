@@ -6,6 +6,7 @@ using DG.Tweening;
 using UniRx;
 using Unity.VisualScripting;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CompositionPage : CommonPage
 {
@@ -24,8 +25,10 @@ public class CompositionPage : CommonPage
 
     [Header("Attribute")]
     [SerializeField] Attribute attribute;
+
     [Header("Menu")]
     [SerializeField] TabMenu tabMenu;
+    [SerializeField] GameObject noExtraComponentText;
 
     // data
     TankParts currentTab = TankParts.Light;
@@ -50,6 +53,11 @@ public class CompositionPage : CommonPage
             currentTab = (TankParts)tab.GetTabIndex();
             availablePartList = TankStatManager.Instance.GetObtainedTankPart(currentTab);
             currentPartIndex = availablePartList.IndexOf(selectingTankParts[currentTab]);
+
+            leftArrowBtn.GetComponent<Button>().interactable = availablePartList.Count > 1;
+            rightArrowBtn.GetComponent<Button>().interactable = availablePartList.Count > 1;
+            noExtraComponentText.SetActive(availablePartList.Count <= 1);
+
         }).AddTo(this);
 
         currentStat.Subscribe(stat =>
@@ -58,8 +66,17 @@ public class CompositionPage : CommonPage
         }).AddTo(this);
 
         RefreshAttribute();
+        attribute.SetStat(currentStat.Value);
 
         onCloseCallback += OnClose;
+    }
+
+    private void OnEnable()
+    {
+        selectingTankParts = GameManager.Instance.GetCurrentTankParts();
+        RefreshAttribute();
+        attribute.SetStat(currentStat.Value);
+        
     }
 
     void LoadTank()
@@ -75,8 +92,8 @@ public class CompositionPage : CommonPage
     {
         var part = availablePartList[Mathf.Abs(--currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
-        RefreshAttribute();
-
+        //RefreshAttribute();
+        SoundManager.Instance.PlaySound("PartSwitch");
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
         else
@@ -95,6 +112,8 @@ public class CompositionPage : CommonPage
                 StartCoroutine(ChangeTankPartHorizontally(true, currentTab, sprite));
         }
 
+        RefreshAttribute();
+
         // Debug
         //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
@@ -103,8 +122,8 @@ public class CompositionPage : CommonPage
     {
         var part = availablePartList[Mathf.Abs(++currentPartIndex % availablePartList.Count)];
         selectingTankParts[currentTab] = part;
-        RefreshAttribute();
-
+        //RefreshAttribute();
+        SoundManager.Instance.PlaySound("PartSwitch");
         if (currentTab == TankParts.Light)
             StartCoroutine(ChangeTankColor(part.color));
         else
@@ -123,20 +142,22 @@ public class CompositionPage : CommonPage
                 StartCoroutine(ChangeTankPartHorizontally(false, currentTab, sprite));
         }
 
+        RefreshAttribute();
+
         // Debug
         //currentStat.Value = new TankStat(Random.Range(10, 100), Random.Range(10, 50), Random.Range(1, 15), Random.Range(10, 150));
     }
 
     IEnumerator ChangeTankColor(Color32 color)
     {
-        SetArrowVisible(false);
+        //SetArrowVisible(false);
 
         //var c = new Color32(color.r, color.g, color.b, 255);
         lightImg.DOColor(color, 0.25f);
         //lightImg.color = c;
         yield return new WaitForSeconds(0f);
 
-        SetArrowVisible(true);
+        //SetArrowVisible(true);
     }
     IEnumerator ChangeTankPartHorizontally(bool isLeft, TankParts tankPart, Sprite s)
     {
@@ -228,5 +249,13 @@ public class CompositionPage : CommonPage
     void RefreshAttribute()
     {
         currentStat.Value = TankStatManager.Instance.CalculateTankStat(selectingTankParts.Values.ToList());
+    }
+
+    public void OnClickGoButton()
+    {
+        GameManager.Instance.SetCurrentTankParts(selectingTankParts.Values.ToList());
+
+        SceneManager.LoadScene("LevelPrototypeScene");
+        SoundManager.Instance.PlayMusic("Level1");
     }
 }
