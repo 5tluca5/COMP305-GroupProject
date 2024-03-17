@@ -102,7 +102,7 @@ MonoBehaviour:
     m_Bits: 200
   wallLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1024
   wallDetection: {fileID: 9154399952204179719}
   lightImg: {fileID: 0}
   trackLImg: {fileID: 0}

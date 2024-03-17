@@ -664,6 +664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthBar: {fileID: 6765859979216155127}
   playerHealthText: {fileID: 4660715787670574771}
+  curCoinText: {fileID: 9219425491925945182}
+  enemyDropCoinPrefab: {fileID: 8456277674714783033, guid: 8745b216545448d4ba43eab57087b0e8, type: 3}
   curLevelText: {fileID: 2793197866182195211}
   gameOverPage: {fileID: 0}
   gameClearPage: {fileID: 0}
@@ -769,7 +771,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: '0
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 58d1938b80974c041a827e2ace11d680, type: 2}
   m_sharedMaterial: {fileID: 1653156505295033007, guid: 58d1938b80974c041a827e2ace11d680, type: 2}
@@ -804,7 +808,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

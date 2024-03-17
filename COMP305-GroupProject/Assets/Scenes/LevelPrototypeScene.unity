@@ -18626,6 +18626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6203125722478355154, guid: 1f3b577ae7a1f704eb7bd1f96dc62ae2, type: 3}
+      propertyPath: m_TagString
+      value: GUI
+      objectReference: {fileID: 0}
     - target: {fileID: 6641432117190100542, guid: 1f3b577ae7a1f704eb7bd1f96dc62ae2, type: 3}
       propertyPath: gameOverPage
       value: 
@@ -29176,7 +29180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.78
+      value: -19.5
       objectReference: {fileID: 0}
     - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29268,6 +29272,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 15173284}
     - target: {fileID: 1487633696167928437, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
+      propertyPath: _bossTankPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487633696167928437, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
       propertyPath: _eliteTankPrefabs.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -29275,6 +29283,10 @@ PrefabInstance:
       propertyPath: _enemyTankPrefabs.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1487633696167928437, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
+      propertyPath: _bossTankPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2042220487507806729, guid: fbac3cad3cdf3644dbf905447c6a8f0c, type: 3}
     - target: {fileID: 1487633696167928437, guid: 9ad321a6e1a9e9c4d9fc3f227de08775, type: 3}
       propertyPath: _eliteTankPrefabs.Array.data[0]
       value: 

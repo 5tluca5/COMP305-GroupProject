@@ -7,6 +7,7 @@ TagManager:
   - bullet
   - playerBase
   - enemy
+  - GUI
   layers:
   - Default
   - TransparentFX

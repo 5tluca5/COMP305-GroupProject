@@ -127,9 +127,9 @@ public abstract class Tank : MonoBehaviour
         var curRotation = transform.localEulerAngles.z;
 
         if (curRotation == 90 || curRotation == 270)
-            return Physics2D.OverlapBox(wallDetection.position, new Vector2(0.5f, 2.2f), 0, obstacleLayer);
+            return Physics2D.OverlapBox(wallDetection.position, new Vector2(0.5f, 2f), 0, obstacleLayer);
         else
-            return Physics2D.OverlapBox(wallDetection.position, new Vector2(2.2f, 0.5f), 0, obstacleLayer);
+            return Physics2D.OverlapBox(wallDetection.position, new Vector2(2f, 0.5f), 0, obstacleLayer);
 
     }
     protected bool IsfacingWall()
@@ -137,9 +137,9 @@ public abstract class Tank : MonoBehaviour
         var curRotation = transform.localEulerAngles.z;
 
         if (curRotation == 90 || curRotation == 270)
-            return Physics2D.OverlapBox(wallDetection.position, new Vector2(0.5f, 2.2f), 0, wallLayer);
+            return Physics2D.OverlapBox(wallDetection.position, new Vector2(0.5f, 2f), 0, wallLayer);
         else
-            return Physics2D.OverlapBox(wallDetection.position, new Vector2(2.2f, 0.5f), 0, wallLayer);
+            return Physics2D.OverlapBox(wallDetection.position, new Vector2(2f, 0.5f), 0, wallLayer);
 
     }
 

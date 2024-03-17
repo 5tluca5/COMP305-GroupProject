@@ -82,21 +82,33 @@ public class GameManager : MonoBehaviour
         levelDataDict.Add(2, new List<int> { 1, 0, 0, 0, 1, 0, 0, 0, 0, 1 });
         levelDataDict.Add(3, new List<int> { 0, 1, 0, 0, 1, 0, 0, 1, 0, 1 });
         levelDataDict.Add(4, new List<int> { 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 });
-        levelDataDict.Add(5, new List<int> { 0, 1, 1, 0, 1, 0, 1, 0, 0, 1 });
+        levelDataDict.Add(5, new List<int> { 0, 1, 1, 0, 1, 0, 1, 0, 0, 2 });
         levelDataDict.Add(6, new List<int> { 0, 0, 0, 0, 1, 0, 0, 1, 1, 1 });
         levelDataDict.Add(7, new List<int> { 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 });
         levelDataDict.Add(8, new List<int> { 1, 0, 1, 0, 1, 0, 1, 0, 0, 1 });
-        levelDataDict.Add(9, new List<int> { 1, 0, 1, 0, 1, 0, 0, 1, 0, 1 });
-        levelDataDict.Add(10, new List<int> { 1, 0, 1, 0, 1, 0, 0, 1, 0, 1 });
+        levelDataDict.Add(9, new List<int> { 1, 0, 1, 0, 1, 0, 0, 1, 0, 2 });
+        levelDataDict.Add(10, new List<int> { 1, 0, 1, 0, 2, 0, 0, 1, 0, 2 });
 
         for (int i = 11; i < 100; i++)
         {
-            int totalEnemy = 10 + (i / 10) * 2;
+            int totalEnemy = 10 + (i / 10) * 2 + UnityEngine.Random.Range(0, i/10);
             List<int> data = new List<int>();
 
             for (int j = 0; j < totalEnemy; j++)
             {
-                data.Add(UnityEngine.Random.Range(0, 100) < i ? 1 : 0);
+                if(j % 5 == 0)
+                {
+                    data.Add(UnityEngine.Random.Range(0, 10) < 5 ? 2 : 1);
+                }
+                else if(j == 10)
+                {
+                    data.Add(2);
+                }
+                else
+                {
+                    data.Add(UnityEngine.Random.Range(0, 100) < i ? 1 : 0);
+                }
+                
             }
 
             levelDataDict.Add(i, data);
@@ -128,7 +140,7 @@ public class GameManager : MonoBehaviour
             unlockedTankParts.Add(tpd.id);
         }
 
-        
+        PlayerCoins.Value = PlayerPrefs.GetInt(Constant.SAVE_KEY_PLAYER_COIN, 0);
     }
 
     public Dictionary<TankParts, TankPart> GetCurrentTankParts()
@@ -210,7 +222,7 @@ public class GameManager : MonoBehaviour
 
     public void EnemyDropCoin(int amount)
     {
-
+        PlayerCoins.Value += amount;
     }
 
 

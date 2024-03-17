@@ -13,6 +13,7 @@ public class GameSceneUI : MonoBehaviour
 
     [Header("Coin")]
     [SerializeField] TMP_Text curCoinText;
+    [SerializeField] GameObject enemyDropCoinPrefab;
 
     [Header("Level")]
     [SerializeField] TMP_Text curLevelText;
@@ -23,10 +24,12 @@ public class GameSceneUI : MonoBehaviour
 
     PlayerController player;
     float playerMaxHp = 150f;
+    Canvas canvas;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        canvas = GetComponentInParent<Canvas>();
 
         playerMaxHp = player.GetTankStat().health;
         playerHealthBar.Setup(playerMaxHp);
@@ -66,5 +69,12 @@ public class GameSceneUI : MonoBehaviour
         GameManager.Instance.SetGameClear(false);
         GameManager.Instance.SetGameOver(false);
         GameManager.Instance.ResetGameLevel();
+    }
+
+    public void CreateEnemyDropCoinGO(Vector3 pos, int amount)
+    {
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(pos);
+        var dp = Instantiate(enemyDropCoinPrefab, transform.parent);
+        dp.transform.position = viewportPosition;
     }
 }

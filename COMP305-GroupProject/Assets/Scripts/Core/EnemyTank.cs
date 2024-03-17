@@ -23,6 +23,8 @@ public class EnemyTank : Tank
 
     private Subject<EnemyTank> onDestroy;
 
+    Vector3 lastPos;
+
     protected override void SetupTank()
     {
         stat = GameManager.Instance.GetEnemyTankStat(type);
@@ -54,7 +56,7 @@ public class EnemyTank : Tank
         if (stat.health <= 0f)
         {
             //Do explosion?
-
+            
             DropCoin();
             Destroy(gameObject);
         }
@@ -62,7 +64,7 @@ public class EnemyTank : Tank
 
     private void DropCoin()
     {
-        int amount;
+        int amount = 0;
 
         switch(type)
         {
@@ -77,7 +79,8 @@ public class EnemyTank : Tank
                 break;
         }
 
-        Game
+        GameManager.Instance.EnemyDropCoin(amount);
+        GameObject.FindGameObjectWithTag("GUI").GetComponent<GameSceneUI>().CreateEnemyDropCoinGO(transform.position, amount);
     }
 
     protected override void Start()
@@ -85,6 +88,7 @@ public class EnemyTank : Tank
         base.Start();
 
         playerBase = GameObject.FindGameObjectWithTag("playerBase").transform;
+        lastPos = transform.position;
     }
 
     protected override void Update()
@@ -144,6 +148,7 @@ public class EnemyTank : Tank
             changeDirectionTimer += Time.deltaTime * 0.5f;
         }
 
+        
         if (changeDirectionTimer >= changeDirectionTime)
         {
             Direction newDir;
@@ -200,7 +205,7 @@ public class EnemyTank : Tank
         }
         else if (IsfacingObstacle())
         {
-            //changeDirectionTimer += Time.deltaTime * 0.05f;
+            changeDirectionTimer += Time.deltaTime * 0.2f;
         }
 
         if (changeDirectionTimer >= changeDirectionTime)
