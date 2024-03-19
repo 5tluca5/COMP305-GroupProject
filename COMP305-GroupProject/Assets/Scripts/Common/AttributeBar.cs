@@ -15,7 +15,7 @@ public class AttributeBar : MonoBehaviour
     [SerializeField] float duration = 1f;
     float timer = 0f;
 
-    void Start()
+    void Awake()
     {
         slider = GetComponent<Slider>();
 
