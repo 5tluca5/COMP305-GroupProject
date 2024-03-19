@@ -18638,6 +18638,10 @@ PrefabInstance:
       propertyPath: gameClearPage
       value: 
       objectReference: {fileID: 1626133749}
+    - target: {fileID: 6641432117190100542, guid: 1f3b577ae7a1f704eb7bd1f96dc62ae2, type: 3}
+      propertyPath: enemyDropCoinPrefab
+      value: 
+      objectReference: {fileID: 1317177633}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18659,6 +18663,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2f6613ec682da4eabb947423859651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1317177633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7555091665006306331, guid: 1f3b577ae7a1f704eb7bd1f96dc62ae2, type: 3}
+  m_PrefabInstance: {fileID: 1317177630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1320911216
 GameObject:
   m_ObjectHideFlags: 0

@@ -90,6 +90,7 @@ public class TankStatManager : MonoBehaviour
 
     void GenerateTankPartStatList()
     {
+        tankPartStatList.Clear();
         dictByTankParts.Clear();
         dictById.Clear();
         tankPartStatCSVtData = Resources.Load<TextAsset>("TankStat1");
@@ -191,6 +192,11 @@ public class TankStatManager : MonoBehaviour
         // Do logic here..
         var optainedPart = GameManager.Instance.GetUnlockedTankPartIds();
         return dictByTankParts[parts].Values.Where(x => optainedPart.Contains(x.id)).ToList();
+    }
+
+    public List<TankPart> GetTankPart(TankParts parts)
+    {
+        return dictByTankParts[parts].Values.ToList();
     }
 
     public TankPart GetTankPartData(TankParts parts, int id)

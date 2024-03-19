@@ -143,6 +143,21 @@ public class GameManager : MonoBehaviour
         PlayerCoins.Value = PlayerPrefs.GetInt(Constant.SAVE_KEY_PLAYER_COIN, 0);
     }
 
+    void SaveData()
+    {
+        foreach(var id in unlockedTankParts)
+        {
+            PlayerPrefs.SetInt(Constant.SAVE_KEY_CURRENT_TANK_PART + id.ToString(), 1);
+        }
+
+        foreach(var tp in currentTankParts)
+        {
+            PlayerPrefs.SetInt(Constant.SAVE_KEY_CURRENT_TANK_PART + tp.Key, tp.Value.subId);
+        }
+
+        PlayerPrefs.SetInt(Constant.SAVE_KEY_PLAYER_COIN, PlayerCoins.Value);
+    }
+
     public Dictionary<TankParts, TankPart> GetCurrentTankParts()
     {
         return currentTankParts;
@@ -220,9 +235,34 @@ public class GameManager : MonoBehaviour
         return unlockedTankParts.ToList();
     }
 
+    public bool IsTankPartUnlocked(TankPart tp)
+    {
+        return unlockedTankParts.Contains(tp.id);
+    }
+
+    public bool CanPurchaseTankPart(TankPart tp)
+    {
+        return PlayerCoins.Value >= tp.cost && !IsTankPartUnlocked(tp);
+    }
+
+    public bool PurchaseTankPart(TankPart tp)
+    {
+        if(CanPurchaseTankPart(tp))
+        {
+            PlayerCoins.Value -= tp.cost;
+            unlockedTankParts.Add(tp.id);
+            SaveData();
+
+            return true;
+        }
+
+        return false;
+    }
+
     public void EnemyDropCoin(int amount)
     {
         PlayerCoins.Value += amount;
+        PlayerPrefs.SetInt(Constant.SAVE_KEY_PLAYER_COIN, PlayerCoins.Value);
     }
 
 

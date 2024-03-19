@@ -69,13 +69,13 @@ public class EnemyTank : Tank
         switch(type)
         {
             case EnemyTankType.Normal:
-                amount = Random.Range(1, 5);
+                amount = Random.Range(10, 50);
                 break;
             case EnemyTankType.Elite:
-                amount = Random.Range(10, 20);
+                amount = Random.Range(100, 200);
                 break;
             case EnemyTankType.Boss:
-                amount = Random.Range(50, 70);
+                amount = Random.Range(500, 700);
                 break;
         }
 

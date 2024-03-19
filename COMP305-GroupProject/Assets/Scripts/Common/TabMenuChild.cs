@@ -14,6 +14,7 @@ public class TabMenuChild : MonoBehaviour
     [SerializeField] Text buttonText;
 
     [Header("For color driven")]
+    [SerializeField] bool changeTextColor = true;
     [SerializeField] Color onNormalColor;
     [SerializeField] Color onSelectedColor;
 
@@ -47,7 +48,7 @@ public class TabMenuChild : MonoBehaviour
         {
             buttonImage.color = set ? onSelectedColor : onNormalColor;
 
-            if(buttonText)
+            if(buttonText && changeTextColor)
                 buttonText.color = set ? onSelectedColor : onNormalColor;
         }
     }
