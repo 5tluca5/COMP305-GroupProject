@@ -224,6 +224,4 @@ public class GameManager : MonoBehaviour
     {
         PlayerCoins.Value += amount;
     }
-
-
 }

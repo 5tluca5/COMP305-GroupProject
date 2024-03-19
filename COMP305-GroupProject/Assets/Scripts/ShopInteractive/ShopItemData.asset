@@ -1,0 +1,385 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4841549b2cfd18d478eea90a669c367b, type: 3}
+  m_Name: ShopItemData
+  m_EditorClassIdentifier: 
+  DataList:
+  - id: 0
+    name: 
+    imagePath: 
+    type: 
+    assoPartName: 
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 1
+    name: WheelA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackAFrame1.png
+    type: Light
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.3
+    price: 0
+  - id: 2
+    name: WheelB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackBFrame1.png
+    type: Light
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.4
+    price: 1600
+  - id: 3
+    name: WheelC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackCFrame1.png
+    type: Light
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.5
+    price: 1750
+  - id: 4
+    name: WheelA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackAFrame2.png
+    type: Medium
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.6
+    price: 0
+  - id: 5
+    name: WheelB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackBFrame2.png
+    type: Medium
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.65
+    price: 1600
+  - id: 6
+    name: WheelC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackCFrame2.png
+    type: Medium
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.7
+    price: 1750
+  - id: 7
+    name: WheelA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackAFrame2.png
+    type: Heavy
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.75
+    price: 0
+  - id: 8
+    name: WheelB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackDFrame2.png
+    type: Heavy
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 0.85
+    price: 1600
+  - id: 9
+    name: WheelC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Tracks/TrackDFrame2.png
+    type: Heavy
+    assoPartName: Track
+    damage: 0
+    health: 0
+    fireRate: 0
+    movementSpeed: 1
+    price: 1750
+  - id: 10
+    name: HulkA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/SmallHullA.png
+    type: Light
+    assoPartName: Hull
+    damage: 0
+    health: 50
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 11
+    name: HulkB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/SmallHullB.png
+    type: Light
+    assoPartName: Hull
+    damage: 0
+    health: 70
+    fireRate: 0
+    movementSpeed: 0
+    price: 750
+  - id: 12
+    name: HulkC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/SmallHullC.png
+    type: Light
+    assoPartName: Hull
+    damage: 0
+    health: 90
+    fireRate: 0
+    movementSpeed: 0
+    price: 900
+  - id: 13
+    name: HulkA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/MediumHullA.png
+    type: Medium
+    assoPartName: Hull
+    damage: 0
+    health: 110
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 14
+    name: HulkB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/MediumHullB.png
+    type: Medium
+    assoPartName: Hull
+    damage: 0
+    health: 130
+    fireRate: 0
+    movementSpeed: 0
+    price: 750
+  - id: 15
+    name: HulkC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/MediumHullC.png
+    type: Medium
+    assoPartName: Hull
+    damage: 0
+    health: 150
+    fireRate: 0
+    movementSpeed: 0
+    price: 900
+  - id: 16
+    name: HulkA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/HeavyHullA.png
+    type: Heavy
+    assoPartName: Hull
+    damage: 0
+    health: 170
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 17
+    name: HulkB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/HeavyHullB.png
+    type: Heavy
+    assoPartName: Hull
+    damage: 0
+    health: 185
+    fireRate: 0
+    movementSpeed: 0
+    price: 750
+  - id: 18
+    name: HulkC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Hulls/HeavyHullC.png
+    type: Heavy
+    assoPartName: Hull
+    damage: 0
+    health: 200
+    fireRate: 0
+    movementSpeed: 0
+    price: 900
+  - id: 19
+    name: HeadA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/SmallTowerA.png
+    type: Light
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.4
+    movementSpeed: 0
+    price: 0
+  - id: 20
+    name: HeadB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/SmallTowerB.png
+    type: Light
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.6
+    movementSpeed: 0
+    price: 1150
+  - id: 21
+    name: HeadC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/SmallTowerC.png
+    type: Light
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.8
+    movementSpeed: 0
+    price: 1400
+  - id: 22
+    name: HeadA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/MediumTowerA.png
+    type: Medium
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.4
+    movementSpeed: 0
+    price: 0
+  - id: 23
+    name: HeadB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/MediumTowerB.png
+    type: Medium
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.6
+    movementSpeed: 0
+    price: 1150
+  - id: 24
+    name: HeadC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/MediumTowerC.png
+    type: Medium
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.8
+    movementSpeed: 0
+    price: 1400
+  - id: 25
+    name: HeadA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/HeavyTowerA.png
+    type: Heavy
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.4
+    movementSpeed: 0
+    price: 0
+  - id: 26
+    name: HeadB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/HeavyTowerB.png
+    type: Heavy
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.6
+    movementSpeed: 0
+    price: 1150
+  - id: 27
+    name: HeadC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Towers/HeavyTowerC.png
+    type: Heavy
+    assoPartName: Tower
+    damage: 0
+    health: 0
+    fireRate: 0.8
+    movementSpeed: 0
+    price: 1400
+  - id: 28
+    name: GunA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/SmallGunA.png
+    type: Light
+    assoPartName: Gun
+    damage: 10
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 29
+    name: GunB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/SmallGunB.png
+    type: Light
+    assoPartName: Gun
+    damage: 15
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 350
+  - id: 30
+    name: GunC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/SmallGunC.png
+    type: Light
+    assoPartName: Gun
+    damage: 20
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 500
+  - id: 31
+    name: GunA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/MediumGunA.png
+    type: Medium
+    assoPartName: Gun
+    damage: 30
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 32
+    name: GunB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/MediumGunB.png
+    type: Medium
+    assoPartName: Gun
+    damage: 40
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 350
+  - id: 33
+    name: GunC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/MediumGunC.png
+    type: Medium
+    assoPartName: Gun
+    damage: 50
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 500
+  - id: 34
+    name: GunA
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/HeavyGunA.png
+    type: Heavy
+    assoPartName: Gun
+    damage: 70
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 0
+  - id: 35
+    name: GunB
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/HeavyGunB.png
+    type: Heavy
+    assoPartName: Gun
+    damage: 85
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 350
+  - id: 36
+    name: GunC
+    imagePath: Assets/Resources/Artworks/TankConstructor/Images/Guns/HeavyGunC.png
+    type: Heavy
+    assoPartName: Gun
+    damage: 105
+    health: 0
+    fireRate: 0
+    movementSpeed: 0
+    price: 500
