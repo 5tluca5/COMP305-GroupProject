@@ -8,8 +8,12 @@ using UnityEngine.UI;
 public class GameSceneUI : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] AttributeBar playerHealthBar;
-    [SerializeField] TMP_Text playerHealthText;
+    [Header("Player 1")]
+    [SerializeField] AttributeBar player1HealthBar;
+    [SerializeField] TMP_Text player1HealthText;
+    [Header("Player 2")]
+    [SerializeField] AttributeBar player2HealthBar;
+    [SerializeField] TMP_Text player2HealthText;
 
     [Header("Coin")]
     [SerializeField] TMP_Text curCoinText;
@@ -22,24 +26,50 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] GameObject gameOverPage;
     [SerializeField] GameObject gameClearPage;
 
-    PlayerController player;
+    PlayerController player1;
+    PlayerController player2;
+
     float playerMaxHp = 150f;
     Canvas canvas;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         canvas = GetComponentInParent<Canvas>();
 
-        playerMaxHp = player.GetTankStat().health;
-        playerHealthBar.Setup(playerMaxHp);
-        player.SubscribeCurrentHealth().Subscribe(hp =>
-        {
-            playerHealthBar.Setup(playerMaxHp);
-            playerHealthBar.SetValue(hp);
+        var p1 = GameObject.FindGameObjectWithTag("Player");
+        var p2 = GameObject.FindGameObjectWithTag("Player2");
 
-            playerHealthText.text = hp.ToString() + " / " + playerMaxHp.ToString();
+        if(p1 != null)
+            player1 = p1.GetComponent<PlayerController>();
+
+        if(p2 != null)
+            player2 = p2.GetComponent<PlayerController>();
+
+
+        playerMaxHp = player1.GetTankStat().health;
+
+        player1HealthBar.Setup(playerMaxHp);
+        player1.SubscribeCurrentHealth().Subscribe(hp =>
+        {
+            player1HealthBar.Setup(playerMaxHp);
+            player1HealthBar.SetValue(hp);
+
+            player1HealthText.text = hp.ToString() + " / " + playerMaxHp.ToString();
         }).AddTo(this);
+
+        if(player2 != null)
+        {
+            player2HealthBar.transform.parent.gameObject.SetActive(true);
+
+            player2HealthBar.Setup(playerMaxHp);
+            player2.SubscribeCurrentHealth().Subscribe(hp =>
+            {
+                player2HealthBar.Setup(playerMaxHp);
+                player2HealthBar.SetValue(hp);
+
+                player2HealthText.text = hp.ToString() + " / " + playerMaxHp.ToString();
+            }).AddTo(this);
+        }
 
         GameManager.Instance.IsGameOver.Subscribe(x =>
         {

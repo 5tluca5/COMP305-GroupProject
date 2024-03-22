@@ -9,6 +9,11 @@ public class PlayerTank : Tank
 
     protected override void SetupTank()
     {
+        if(gameObject.tag == "Player2")
+        {
+            gameObject.SetActive(GameManager.Instance.CurGameMode == GameMode.TwoPlayer);
+        }
+
         stat = GameManager.Instance.GetCurrentTankStat();
         tankParts = GameManager.Instance.GetCurrentTankParts();
 
@@ -36,6 +41,8 @@ public class PlayerTank : Tank
             // GG
             Debug.Log("Gameover");
             GameManager.Instance.SetGameOver(true);
+
+            gameObject.SetActive(false);
         }
     }
 }

@@ -243,7 +243,7 @@ public class CompositionPage : CommonPage
 
     void OnClose()
     {
-
+        
     }
 
     void RefreshAttribute()

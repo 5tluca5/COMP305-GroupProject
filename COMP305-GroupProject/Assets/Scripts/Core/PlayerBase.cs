@@ -9,7 +9,7 @@ public class PlayerBase : MonoBehaviour
         //if (!data.isPlayer)
         {
             Destroy(gameObject);
-            GameManager.Instance.SetGameOver(true);
+            GameManager.Instance.SetGameOver(true,true);
         }
     }
 }

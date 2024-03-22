@@ -5,6 +5,12 @@ using System.Linq;
 using System;
 using UniRx;
 
+public enum GameMode : int
+{
+    OnePlayer = 1,
+    TwoPlayer = 2
+}
+
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
@@ -13,6 +19,9 @@ public class GameManager : MonoBehaviour
     public ReactiveProperty<bool> IsGameClear { get; private set; } = new ReactiveProperty<bool>(false);
     public ReactiveProperty<int> CurrentGameLevel { get; private set; } = new ReactiveProperty<int>(1);
     public ReactiveProperty<int> PlayerCoins { get; private set; } = new ReactiveProperty<int>();
+    public GameMode CurGameMode { get; private set; } = GameMode.OnePlayer;
+
+    int gameoverCounter = 0;
 
     public static GameManager Instance
     {
@@ -22,7 +31,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGameOver(bool set) => IsGameOver.Value = set;
+    public void SetGameMode(bool isTwoPlayer)
+    {
+        CurGameMode = isTwoPlayer ? GameMode.TwoPlayer : GameMode.OnePlayer;
+    }
+    public void SetGameOver(bool set, bool hardSet = false)
+    {
+        if (set)
+            gameoverCounter++;
+        else
+            gameoverCounter = 0;
+
+        if (gameoverCounter >= (int)CurGameMode || hardSet || !set)
+            IsGameOver.Value = set;
+    }
+
     public void SetGameClear(bool set) => IsGameClear.Value = set;
 
     private void Awake()
@@ -143,16 +166,16 @@ public class GameManager : MonoBehaviour
         PlayerCoins.Value = PlayerPrefs.GetInt(Constant.SAVE_KEY_PLAYER_COIN, 0);
     }
 
-    void SaveData()
+    public void SaveData()
     {
         foreach(var id in unlockedTankParts)
         {
-            PlayerPrefs.SetInt(Constant.SAVE_KEY_CURRENT_TANK_PART + id.ToString(), 1);
+            PlayerPrefs.SetInt(Constant.SAVE_KEY_UNLOCKED_TANK_PART + id.ToString(), 1);
         }
 
         foreach(var tp in currentTankParts)
         {
-            PlayerPrefs.SetInt(Constant.SAVE_KEY_CURRENT_TANK_PART + tp.Key, tp.Value.subId);
+            PlayerPrefs.SetInt(Constant.SAVE_KEY_CURRENT_TANK_PART + tp.Key.ToString(), tp.Value.subId);
         }
 
         PlayerPrefs.SetInt(Constant.SAVE_KEY_PLAYER_COIN, PlayerCoins.Value);
@@ -169,6 +192,8 @@ public class GameManager : MonoBehaviour
         {
             currentTankParts[tp.parts] = tp;
         }
+
+        SaveData();
     }
 
     public TankStat GetCurrentTankStat()
@@ -262,7 +287,7 @@ public class GameManager : MonoBehaviour
     public void EnemyDropCoin(int amount)
     {
         PlayerCoins.Value += amount;
-        PlayerPrefs.SetInt(Constant.SAVE_KEY_PLAYER_COIN, PlayerCoins.Value);
+        SaveData();
     }
 
 

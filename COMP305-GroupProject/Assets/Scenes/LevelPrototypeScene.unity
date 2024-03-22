@@ -551,6 +551,96 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &25763291
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 37038454}
+    m_Modifications:
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892657778739180068, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_Name
+      value: Player1Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892657778739180068, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892657778739180068, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1955921754}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: curDireciton
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: wallLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605580501423089210, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+--- !u!4 &25763292 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+  m_PrefabInstance: {fileID: 25763291}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &31209072
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +912,7 @@ Transform:
   - {fileID: 133086398}
   - {fileID: 1242894350}
   - {fileID: 1359266814}
+  - {fileID: 25763292}
   - {fileID: 1785500171}
   - {fileID: 986920122}
   m_Father: {fileID: 0}
@@ -29185,7 +29276,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.76
+      value: -8.75
       objectReference: {fileID: 0}
     - target: {fileID: 3411673695128803309, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29225,7 +29316,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3892657778739180068, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: m_Name
-      value: PlayerTank
+      value: Player2Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892657778739180068, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: upKey
+      value: 119
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: downKey
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: fireKey
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: leftKey
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
+      propertyPath: rightKey
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5397351760948299098, guid: f55e9bb7774b045fb92d0151792ce774, type: 3}
       propertyPath: spawnPoint
